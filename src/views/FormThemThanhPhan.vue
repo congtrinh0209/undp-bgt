@@ -126,6 +126,7 @@
                 </v-tooltip>
               </div>
             </div>
+            <!---->
             <div v-else>
               <span>Không có giấy tờ đính kèm!</span>
             </div>
