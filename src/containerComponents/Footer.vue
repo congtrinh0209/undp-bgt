@@ -81,4 +81,31 @@
   .image-footer .img-1 {
     margin-right: 15px;
   }
+  @media screen and (max-width: 426px){
+    #footer, #footer .container {
+      height: 90px
+    }
+    #footer .text-2, #footer .text-3 {
+      text-align: left;
+      margin-top: 5px;
+    }
+  }
+  @media screen and (min-width: 426px) and (max-width: 769px){
+    #footer, #footer .container {
+      height: 56px
+    }
+    #footer .text-2, #footer .text-3 {
+      text-align: left;
+      margin-top: 5px;
+    }
+  }
+  @media screen and (min-width: 769px) and (max-width: 1025px){
+    #footer, #footer .container {
+      height: 56px
+    }
+    #footer .text-2, #footer .text-3 {
+      text-align: left;
+      margin-top: 5px;
+    }
+  }
 </style>

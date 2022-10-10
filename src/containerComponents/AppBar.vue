@@ -1,26 +1,18 @@
 <template>
   <v-app-bar app>
+    <v-app-bar-nav-icon class="btn-visible-drawer pl-2" @click.stop="changeDrawer" style="color: #2161B1;"></v-app-bar-nav-icon>
     <div id="header-app">
       <header id="banner" class="px-3">
         <div class="container layout wrap" style=""> 
           <a href="javascript:;" class="py-0 px-0"> 
             <img class="logo-banner" :src="`${publicPath}/images/image-logo.png`">
-            <span class="title-banner">HỆ THỐNG GIÁM SÁT VÀ ĐÁNH GIÁ THÍCH ỨNG BIẾN ĐỔI KHÍ HẬU - BỘ GIAO THÔNG VẬN TẢI</span>
           </a>
+          <div class="title-banner">
+            HỆ THỐNG GIÁM SÁT VÀ ĐÁNH GIÁ THÍCH ỨNG BIẾN ĐỔI KHÍ HẬU - BỘ GIAO THÔNG VẬN TẢI
+          </div>
         </div>
       </header>
     </div>
-    <!-- <div id="header-nav">
-      <nav class="sort-pages modify-pages" id="navigation"> 
-        <ul aria-label="Site Pages" role="menubar" class="container">
-          <li v-for="(item, i) in items" :key="i" :class="indexTab == i ? 'selected' : ''" :id="'layout_'+i" role="presentation">
-            <a @click="redirectTo(item, i)" :class="item['class']" :id="item['id']" :aria-labelledby="'layout_'+i" aria-haspopup="true"  href="javascript:;" role="menuitem">
-              <span> {{item.title}}</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </div> -->
   </v-app-bar>
 </template>
 
@@ -82,6 +74,11 @@
     watch: {
     },
     methods: {
+      changeDrawer () {
+        let vm = this
+        let drawer = vm.$store.state.drawer
+        vm.$store.commit('SET_DRAWER', !drawer)
+      },
       redirectTo (item, index) {
         this.$store.commit('SET_INDEXTAB', index)
         this.$router.push({ path: item.to })
@@ -137,6 +134,7 @@
     margin-right: 13px;
   }
   .title-banner {
+    display: flex;
     font-family: Roboto Slab;
     font-style: normal;
     font-weight: bold;
@@ -146,6 +144,8 @@
     text-transform: uppercase;
     letter-spacing: 0.05em;
     color: #FFFFFF;
+    align-content: center;
+    flex-wrap: wrap;
     text-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
   }
   #header-nav {
@@ -218,6 +218,44 @@
     background-repeat: no-repeat;
     background-position: right -2px top -2px;
     background-size: auto 35px;
+  }
+  .btn-visible-drawer {
+    display: none;
+  }
+  @media screen and (max-width: 426px){
+    
+  }
+  @media screen and (max-width: 769px){
+    header {
+      height: 60px !important;
+    }
+    header .v-toolbar__content {
+      height: 60px !important;
+    }
+    #header-app {
+      height: 60px;
+    }
+    #banner .container {
+      height: 60px;
+    }
+    #banner .container a {
+      max-width: 50px;
+    }
+    .title-banner {
+      max-width: calc(100% - 50px);
+      font-size: 13px;
+      line-height: 18px;
+      align-content: center;
+    }
+    .btn-visible-drawer {
+      display: block;
+    }
+  }
+  @media screen and (min-width: 769px) and (max-width: 1025px){
+    .title-banner {
+      font-size: 16px;
+      align-content: center;
+    }
   }
 </style>
 

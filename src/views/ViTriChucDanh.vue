@@ -1,6 +1,6 @@
 <template>
   <v-card
-    class="mx-auto pa-3"
+    class="mx-auto pa-3 pt-0"
     outlined
     flat
   >

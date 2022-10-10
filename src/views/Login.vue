@@ -11,7 +11,7 @@
           <v-flex style="text-align: center;">
             <img class="img-login-logo" :src="`${publicPath}/images/image-logo.png?t=93111413`">
           </v-flex>
-          <v-flex style="text-align: center;margin-top: 20px;" class="pt-1">
+          <v-flex class="wrap-title pt-1">
             <div class="text-1">HỆ THỐNG GIÁM SÁT VÀ ĐÁNH GIÁ THÍCH ỨNG BIẾN ĐỔI KHÍ HẬU</div>
             <div class="text-2">BỘ GIAO THÔNG VẬN TẢI</div>
           </v-flex>
@@ -487,7 +487,7 @@
     // box-shadow: inset -4px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 20px;
     width: auto;
-    height: 365px;
+    height: auto;
     // padding: 45px;
     margin: 0 auto;
     margin-top: 40px;
@@ -567,13 +567,6 @@
   .btn-login {
     background: linear-gradient(90deg, #114078 0%, #3757AA 100%);
   }
-  // .wrap-form .theme--light.v-text-field > .v-input__control > .v-input__slot:before {
-  //   border-color: #ffffff !important
-  // }
-  // .wrap-form .theme--light.v-text-field > .v-input__control > .v-input__slot:after {
-  //   border-color: #ffffff !important
-  // }
-  // 
   .wrap-title, .wrap-btn-login {
     text-align: center;
   }
@@ -585,28 +578,77 @@
     left: 100px;
     color: #ffffff !important;
   }
-  @media screen and (min-width: 320px) and (max-width: 768px) {
-    .container-wrap {
-      width: 300px;
-      padding: 8px;
-      margin-top: 20%
+  .img-login-logo {
+    width: 85px;
+  }
+  .wrap-title {
+    text-align: center;
+    margin-top: 20px;
+  }
+  @media screen and (max-width: 426px) {
+    .img-login-logo {
+      width: 65px;
     }
-    .text-1, .text-2 {
+    .container-wrap {
+      padding: 8px;
+      margin-top: 0px;
+    }
+    .wrap-title {
+      text-align: center;
+      margin-top: 10px;
+    }
+    #login-page .text-1 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+    #login-page .text-2 {
       font-size: 16px;
     }
-    .wrap-title, .wrap-btn-login {
+    .wrap-btn-login {
       text-align: center;
     }
-  }
-  @media screen and (min-width: 375px) and (max-width: 768px){
-    .container-wrap {
-      width: 350px;
-      padding: 8px;
+    .wrap-form {
+      margin: 0 10px;
+      margin-top: 25px;
+    }
+    .wrap-contact-info {
+      left: 15px;
     }
   }
-  @media screen and (min-width: 768px){
-    .img-login-logo {
-      width: 85px;
+  @media screen and (min-width: 426px) and (max-width: 769px){
+    .container-wrap {
+      padding: 8px;
+      margin-top: 0px;
+    }
+    .wrap-title {
+      text-align: center;
+      margin-top: 10px;
+    }
+    .wrap-form {
+      margin-top: 30px;
+    }
+    #login-page .text-1 {
+      font-size: 20px;
+    }
+    .wrap-contact-info {
+      left: 50px;
+    }
+  }
+
+  @media screen and (min-width: 769px) and (max-width: 1025px){
+    .container-wrap {
+      padding: 8px;
+      margin-top: 20px;
+    }
+    .wrap-title {
+      text-align: center;
+      margin-top: 10px;
+    }
+    .wrap-form {
+      margin-top: 30px;
+    }
+    .wrap-contact-info {
+      left: 50px;
     }
   }
 </style>

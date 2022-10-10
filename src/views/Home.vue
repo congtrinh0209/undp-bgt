@@ -3,7 +3,7 @@
     <Drawer></Drawer>
     <AppBar></AppBar>
     <v-main>
-      <div class="container">
+      <div class="container wrap-content-page">
         <router-view></router-view>
       </div>
       <Footer></Footer>
@@ -36,7 +36,21 @@ export default {
   }
 };
 </script>
-<style lang="sass">
-  main.v-main
+<style lang="scss">
+  main.v-main {
     padding-top: 54px !important
+  }
+  @media screen and (max-width: 426px){
+    
+  }
+  @media screen and (max-width: 769px){
+    .wrap-content-page {
+      padding-bottom: 70px !important
+    }
+  }
+  @media screen and (max-width: 1025px){
+    .wrap-content-page {
+      padding-bottom: 70px !important
+    }
+  }
 </style>

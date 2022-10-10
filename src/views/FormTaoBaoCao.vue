@@ -97,7 +97,7 @@
             >
             </v-autocomplete>
           </v-col>
-          <v-col cols="12" md="7" class="mb-0 pt-3 pb-0" style="align-self: center;">
+          <v-col cols="12" md="7" class="wrap-checkbox mb-0 pt-3 pb-0" style="align-self: center;">
             <v-btn small color="primary" class="mx-2  text-white" @click.native="toggleTatCaBaoCao('all')" >
               <v-icon left dark size="18">
                 mdi-check-all
@@ -110,10 +110,10 @@
               </v-icon>
               Bỏ tất cả
             </v-btn>
-            <v-checkbox v-model="filterMauDaChon" color="primary" class="d-inline-flex" hide-details style="margin-left: 30px;margin-top: 0">
+            <v-checkbox v-model="filterMauDaChon" color="primary" class="d-inline-flex checkbox-loaibaocao" hide-details style="margin-top: 0">
               <template v-slot:label>Đã chọn &nbsp;<span style="color: green">({{counterBaoCaoDaChon}})</span></template>
             </v-checkbox>
-            <v-checkbox v-model="filterMauChuaChon" color="primary" class="d-inline-flex" hide-details style="margin-left: 30px;margin-top: 0">
+            <v-checkbox v-model="filterMauChuaChon" color="primary" class="d-inline-flex checkbox-loaibaocao" hide-details style="margin-top: 0">
               <template v-slot:label>Chưa chọn &nbsp;<span style="color: red">({{counterBaoCaoChuaChon}})</span></template>
             </v-checkbox>
           </v-col>
@@ -157,7 +157,7 @@
             >
             </v-autocomplete>
           </v-col>
-          <v-col cols="12" md="7" class="mb-0 pt-3 pb-0" style="align-self: center;">
+          <v-col cols="12" md="7" class="wrap-checkbox mb-0 pt-3 pb-0" style="align-self: center;">
             <v-btn small color="primary" class="mx-2  text-white" @click.native="toggleTatCaDonVi('all')" >
               <v-icon left dark size="18">
                 mdi-check-all
@@ -170,10 +170,10 @@
               </v-icon>
               Bỏ tất cả
             </v-btn>
-            <v-checkbox v-model="filterDonViDaChon" color="primary" class="d-inline-flex" hide-details style="margin-left: 30px;margin-top: 0">
+            <v-checkbox v-model="filterDonViDaChon" color="primary" class="d-inline-flex checkbox-donvi" hide-details style="margin-top: 0">
               <template v-slot:label>Đã chọn &nbsp;<span style="color: green">({{counterDonViDaChon}})</span></template>
             </v-checkbox>
-            <v-checkbox v-model="filterDonViChuaChon" color="primary" class="d-inline-flex" hide-details style="margin-left: 30px;margin-top: 0">
+            <v-checkbox v-model="filterDonViChuaChon" color="primary" class="d-inline-flex checkbox-donvi" hide-details style="margin-top: 0">
               <template v-slot:label>Chưa chọn &nbsp;<span style="color: red">({{counterDonViChuaChon}})</span></template>
             </v-checkbox>
           </v-col>
@@ -585,5 +585,17 @@ export default {
       color-stop(0.44, rgb(122,153,217)),
       color-stop(0.72, rgb(73,125,189)),
       color-stop(0.86, rgb(28,58,148)));
+  }
+  .checkbox-donvi, .checkbox-loaibaocao {
+    margin-left: 30px;
+  }
+
+  @media screen and (max-width: 1025px){
+    .checkbox-donvi, .checkbox-loaibaocao {
+      margin-left: 10px;
+    }
+    .wrap-checkbox {
+      padding: 0px;
+    }
   }
 </style>

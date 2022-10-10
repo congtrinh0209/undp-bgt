@@ -232,7 +232,10 @@
                     <div @click.stop="xemChiTietBaoCao(item)">{{ item.tenBaoCao }}</div>
                   </template>
                   <template v-slot:item.kyBaoCao="{ item }">
-                    <div @click.stop="xemChiTietBaoCao(item)">{{ item.kyBaoCao.tenMuc }}</div>
+                    <div @click.stop="xemChiTietBaoCao(item)">
+                      <span>{{ item.kyBaoCao.tenMuc }}</span>
+                      <span v-if="item.nam"> - {{ item.nam }}</span>
+                    </div>
                   </template>
                   <template v-slot:item.coQuanThucHien="{ item }">
                     <div @click.stop="xemChiTietBaoCao(item)">{{ item.coQuanThucHien.tenGoi }}</div>
@@ -319,7 +322,7 @@ export default {
               align: 'left',
               value: 'maBaoCao',
               class: 'th-center',
-              width: 150
+              width: 120
           },
           {
               sortable: false,
@@ -330,11 +333,11 @@ export default {
           },
           {
               sortable: false,
-              text: 'Kỳ báo cáo',
+              text: 'Kỳ, năm báo cáo',
               align: 'left',
               value: 'kyBaoCao',
               class: 'th-center',
-              width: 100
+              width: 90
           },
           {
               sortable: false,
@@ -342,7 +345,7 @@ export default {
               align: 'left',
               value: 'coQuanThucHien',
               class: 'th-center',
-              width: 200
+              width: 150
           },
           {
               sortable: false,
@@ -364,7 +367,7 @@ export default {
               align: 'left',
               value: 'tinhTrang',
               class: 'th-center',
-              width: 120
+              width: 90
           },
           {
               sortable: false,
