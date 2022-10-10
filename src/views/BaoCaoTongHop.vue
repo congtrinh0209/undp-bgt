@@ -408,6 +408,9 @@ export default {
       if (vm.type === 'cho-xu-ly') {
         vm.dynamicType = "Báo cáo chờ xử lý"
       }
+      if (vm.type === 'xu-ly-lai') {
+        vm.dynamicType = "Báo cáo xử lý lại"
+      }
       if (vm.type === 'cho-duyet') {
         vm.dynamicType = "Báo cáo chờ duyệt"
       }
@@ -417,8 +420,7 @@ export default {
       if (vm.type === 'tong-hop') {
         vm.dynamicType = "Tổng hợp báo cáo"
       }
-      vm.selectedItem = vm.items[0].value
-      vm.itemSelect = vm.items[0]
+
       vm.$store.commit('SET_INDEXTAB', 0)
       vm.danhSachBaoCao = []
       vm.getDanhSachBaoCao('reset')
@@ -445,6 +447,9 @@ export default {
         }
         if (vm.type === 'cho-xu-ly') {
           vm.dynamicType = "Báo cáo chờ xử lý"
+        }
+        if (vm.type === 'xu-ly-lai') {
+          vm.dynamicType = "Báo cáo xử lý lại"
         }
         if (vm.type === 'cho-duyet') {
           vm.dynamicType = "Báo cáo chờ duyệt"
@@ -497,6 +502,9 @@ export default {
         if (vm.type !== 'tra-cuu') {
           if (vm.type === 'cho-xu-ly') {
             filter.data.tinhTrang_maMuc = "PROCESSING"
+          }
+          if (vm.type === 'xu-ly-lai') {
+            filter.data.tinhTrang_maMuc = "REPROCESSING"
           }
           if (vm.type === 'cho-duyet') {
             filter.data.tinhTrang_maMuc = "APPROVAL"
