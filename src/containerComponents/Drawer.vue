@@ -109,6 +109,20 @@
           <v-list-item-title class="text-drawer text-list">Tra cứu</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
+      <!-- -->
+      <v-list-item v-if="isAdmin || checkRole('XEMTATCABAOCAO')" :class="menuName === 'ThongKeMauBaoCao' ? 'item-active' : ''" class="mb-3 list-menu" @click.stop="goToPage('/thong-ke-mau-bao-cao')">
+        <v-list-item-icon >
+          <v-tooltip top color="#0073C8">
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon v-bind="attrs" v-on="on" class="icon-draw" style="font-size: 24px !important">mdi-chart-bar</v-icon>
+            </template>
+            <span>Thống kê mẫu báo cáo</span>
+          </v-tooltip>
+        </v-list-item-icon>
+        <v-list-item-content>
+          <v-list-item-title class="text-drawer text-list">Thống kê mẫu</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
       <!--  -->
       <!-- <v-list-item :class="menuName === 'TongHopBaoCao' ? 'item-active' : ''" class="mb-3 list-menu" >
         <v-list-item-icon >

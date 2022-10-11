@@ -7,6 +7,7 @@
 
 <script>
 import VueConfirmDialog from './views/ConfirmDialog.vue'
+
 export default {
   name: 'App',
 

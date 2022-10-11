@@ -42,6 +42,18 @@ export default new Router({
           props: true
         },
         {
+          path: '/thong-ke-mau-bao-cao',
+          name: 'MauThongKe',
+          component: () => import('@/views/MauThongKe'),
+          props: true
+        },
+        {
+          path: '/thong-ke-mau-bao-cao/:id',
+          name: 'MauThongKe',
+          component: () => import('@/views/MauThongKe'),
+          props: true
+        },
+        {
           path: '/co-quan-don-vi',
           name: 'CoQuanDonVi',
           component: () => import('@/views/CoQuanDonVi'),
