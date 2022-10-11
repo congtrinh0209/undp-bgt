@@ -69,7 +69,7 @@
         </v-list-item-content>
       </v-list-item> -->
       <!--  -->
-      <v-list-item v-if="isAdmin || checkRole('XEMBAOCAODONVI')" :class="menuName === 'BaoCaoChoXuLy' ? 'item-active' : ''" class="mb-3 list-menu" @click.stop="goToPage('/bao-cao/cho-xu-ly')">
+      <v-list-item v-if="isAdmin || checkRole('XEMBAOCAODONVI') || checkRole('XEMTATCABAOCAO')" :class="menuName === 'BaoCaoChoXuLy' ? 'item-active' : ''" class="mb-3 list-menu" @click.stop="goToPage('/bao-cao/cho-xu-ly')">
         <v-list-item-icon >
           <v-tooltip top color="#0073C8">
             <template v-slot:activator="{ on, attrs }">
@@ -82,7 +82,20 @@
           <v-list-item-title class="text-drawer text-list">Báo cáo chờ xử lý</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
-      <v-list-item v-if="isAdmin || checkRole('XEMBAOCAODONVI')" :class="menuName === 'BaoCaoChoDuyet' ? 'item-active' : ''" class="mb-3 list-menu" @click.stop="goToPage('/bao-cao/cho-duyet')">
+      <v-list-item v-if="isAdmin || checkRole('XEMBAOCAODONVI') || checkRole('XEMTATCABAOCAO')" :class="menuName === 'BaoCaoXuLyLai' ? 'item-active' : ''" class="mb-3 list-menu" @click.stop="goToPage('/bao-cao/xu-ly-lai')">
+        <v-list-item-icon >
+          <v-tooltip top color="#0073C8">
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon v-bind="attrs" v-on="on" class="icon-draw" style="font-size: 24px !important">mdi-ballot-recount-outline</v-icon>
+            </template>
+            <span>Báo cáo xử lý lại</span>
+          </v-tooltip>
+        </v-list-item-icon>
+        <v-list-item-content>
+          <v-list-item-title class="text-drawer text-list">Báo cáo xử lý lại</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+      <v-list-item v-if="isAdmin || checkRole('XEMBAOCAODONVI') || checkRole('XEMTATCABAOCAO')" :class="menuName === 'BaoCaoChoDuyet' ? 'item-active' : ''" class="mb-3 list-menu" @click.stop="goToPage('/bao-cao/cho-duyet')">
         <v-list-item-icon >
           <v-tooltip top color="#0073C8">
             <template v-slot:activator="{ on, attrs }">
@@ -96,7 +109,7 @@
         </v-list-item-content>
       </v-list-item>
       <!--  -->
-      <v-list-item v-if="isAdmin || checkRole('XEMTATCABAOCAO')" :class="menuName === 'TraCuu' ? 'item-active' : ''" class="mb-3 list-menu" @click.stop="goToPage('/bao-cao/tra-cuu')">
+      <v-list-item v-if="isAdmin || checkRole('XEMBAOCAODONVI') || checkRole('XEMTATCABAOCAO')" :class="menuName === 'TraCuu' ? 'item-active' : ''" class="mb-3 list-menu" @click.stop="goToPage('/bao-cao/tra-cuu')">
         <v-list-item-icon >
           <v-tooltip top color="#0073C8">
             <template v-slot:activator="{ on, attrs }">
@@ -244,6 +257,9 @@
       if (currentQuery.params.hasOwnProperty('type') && currentQuery.params.type == 'cho-duyet') {
         vm.menuName = 'BaoCaoChoDuyet'
       }
+      if (currentQuery.params.hasOwnProperty('type') && currentQuery.params.type == 'xu-ly-lai') {
+        vm.menuName = 'BaoCaoXuLyLai'
+      }
       if (currentQuery.params.hasOwnProperty('type') && currentQuery.params.type == 'bao-cao-moi') {
         vm.menuName = 'BaoCaoMoi'
       }
@@ -284,6 +300,9 @@
         }
         if (newRoute.params.hasOwnProperty('type') && newRoute.params.type == 'cho-duyet') {
           vm.menuName = 'BaoCaoChoDuyet'
+        }
+        if (newRoute.params.hasOwnProperty('type') && newRoute.params.type == 'xu-ly-lai') {
+          vm.menuName = 'BaoCaoXuLyLai'
         }
         // if (newRoute.params.hasOwnProperty('type') && newRoute.params.type == 'bao-cao-moi') {
         //   vm.menuName = 'BaoCaoMoi'
