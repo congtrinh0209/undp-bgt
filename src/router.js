@@ -36,6 +36,12 @@ export default new Router({
           props: true
         },
         {
+          path: '/thong-ke',
+          name: 'ThongKe',
+          component: () => import('@/views/ThongKe'),
+          props: true
+        },
+        {
           path: '/bao-cao/:type/:id',
           name: 'BaoCao',
           component: () => import('@/views/ChiTietBaoCao'),

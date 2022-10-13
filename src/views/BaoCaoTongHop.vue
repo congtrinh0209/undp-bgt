@@ -115,6 +115,16 @@
                       clearable
                       return-object
                     >
+                      <template v-slot:selection="data">
+                        <span>{{data.item.maMauBaoCao}}</span>
+                        <span>&nbsp;-&nbsp;</span>
+                        <span>{{data.item.tenGoi}}</span>
+                      </template>
+                      <template v-slot:item="data">
+                        <span>{{data.item.maMauBaoCao}}</span>
+                        <span>&nbsp;-&nbsp;</span>
+                        <span>{{data.item.tenGoi}}</span>
+                      </template>
                     </v-autocomplete>
                 </v-col>
                 <v-col cols="4" class="py-0 mb-2">
@@ -259,7 +269,7 @@
                       <span>Chi tiết báo cáo</span>
                     </v-tooltip>
 
-                    <v-tooltip top>
+                    <v-tooltip top v-if="isAdmin || checkRole('THEMMOIBAOCAO')">
                       <template v-slot:activator="{ on, attrs }">
                         <v-btn @click.stop="xoaBaoCao(item)" color="red" text icon class="ml-2" v-bind="attrs" v-on="on">
                           <v-icon size="18">mdi-delete</v-icon>
@@ -337,7 +347,7 @@ export default {
               align: 'left',
               value: 'kyBaoCao',
               class: 'th-center',
-              width: 90
+              width: 130
           },
           {
               sortable: false,
@@ -584,7 +594,7 @@ export default {
         let filter = {
           collectionName: 'maubaocao',
           data: {
-            orderFields: 'tenGoi',
+            orderFields: 'maMauBaoCao',
             orderTypes: 'asc',
             page: 0,
             size: 1000

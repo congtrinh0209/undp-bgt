@@ -95,14 +95,14 @@
               </template>
               <span>Sửa</span>
             </v-tooltip>
-            <v-tooltip top>
+            <!-- <v-tooltip top>
               <template v-slot:activator="{ on, attrs }">
                 <v-btn @click.stop="deleteChucVu(item)" color="red" text icon class="" v-bind="attrs" v-on="on">
                   <v-icon size="22">mdi-delete</v-icon>
                 </v-btn>
               </template>
               <span>Xóa</span>
-            </v-tooltip>
+            </v-tooltip> -->
           </div>
         </template>
       </v-data-table>

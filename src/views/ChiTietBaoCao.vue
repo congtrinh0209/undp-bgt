@@ -39,8 +39,9 @@
                 <span class="blue-text font-weight-bold">{{chiTietBaoCao.maBaoCao}}</span>
               </v-col>
               <v-col cols="12" md="3" class="pt-0">
-                <span class="label-header">Kỳ báo cáo: </span>
+                <span class="label-header">Kỳ - năm báo cáo: </span>
                 <span class="blue-text font-weight-bold">{{chiTietBaoCao.kyBaoCao ? chiTietBaoCao.kyBaoCao.tenMuc : ''}}</span>
+                <span class="blue-text font-weight-bold" v-if="chiTietBaoCao.nam"> - {{chiTietBaoCao.nam ? chiTietBaoCao.nam : ''}}</span>
               </v-col>
               <v-col cols="12" md="3" class="pt-0">
                 <span class="label-header">Đơn vị xử lý: </span>

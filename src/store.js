@@ -20,7 +20,8 @@ export default new Vuex.Store({
       button: {},
       callback: () => {}
     },
-    formData: ''
+    formData: '',
+    formThongKe: ''
   },
   getters: {
     getIndexTab: (state) => state.indexTab,
@@ -39,6 +40,9 @@ export default new Vuex.Store({
     },
     getFormData: (state) => {
       return state.formData
+    },
+    getFormThongKe: (state) => {
+      return state.formThongKe
     },
   },
   mutations: {
@@ -62,6 +66,9 @@ export default new Vuex.Store({
     },
     SET_FORM_DATA (state, payload) {
       state.formData = payload
+    },
+    SET_FORM_THONGKE (state, payload) {
+      state.formThongKe = payload
     },
   },
   actions: {
@@ -193,6 +200,26 @@ export default new Vuex.Store({
             'Accept': 'application/json', 
             'Content-Type': 'application/json'
           }
+        }
+        axios(config).then(function (response) {
+          let serializable = response.data
+          resolve(serializable)
+        }).catch(function (error) {
+          reject(error)
+        })
+      })
+    },
+    getThongKe ({commit, state}, filter) {
+      return new Promise((resolve, reject) => {
+        let dataPost = JSON.stringify(filter.data)
+        let config = {
+          method: 'post',
+          url: '/v1/datasharing/thanhphanbaocao/thongke',
+          headers: { 
+            'Accept': 'application/json', 
+            'Content-Type': 'application/json'
+          },
+          data : dataPost
         }
         axios(config).then(function (response) {
           let serializable = response.data

@@ -11,16 +11,20 @@
           <v-flex style="text-align: center;">
             <img class="img-login-logo" :src="`${publicPath}/images/image-logo.png?t=93111413`">
           </v-flex>
-          <v-flex class="wrap-title pt-1">
+          <v-flex class="wrap-title pt-1 mb-2">
             <div class="text-1">HỆ THỐNG GIÁM SÁT VÀ ĐÁNH GIÁ THÍCH ỨNG BIẾN ĐỔI KHÍ HẬU</div>
             <div class="text-2">BỘ GIAO THÔNG VẬN TẢI</div>
+          </v-flex>
+          <v-flex class="wrap-title pt-1">
+            <div class="text-1">Monitoring and evaluation system for climate change adaptation activities</div>
+            <div class="text-2">Ministry of Transport</div>
           </v-flex>
         </div>
 
         <div class="wrap-form px-4 py-3" v-if="!signed">
           <div>
             <v-form ref="form" v-model="valid" lazy-validation class="">
-              <v-flex xs12 class="mb-5" style="text-align: center;
+              <v-flex xs12 class="action-title mb-5" style="text-align: center;
                 font-size: 22px;
                 font-family: 'Roboto Slab';
                 color: #fff;
@@ -490,23 +494,23 @@
     height: auto;
     // padding: 45px;
     margin: 0 auto;
-    margin-top: 40px;
+    margin-top: 20px;
   }
   #login-page .text-1 {
     font-family: "Roboto Slab";
     font-style: normal;
     font-weight: 700;
-    font-size: 24px;
+    font-size: 18px;
     line-height: 24px;
     color: #ffffff;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
   #login-page .text-2 {
     font-family: "Roboto Slab";
     font-style: normal;
     font-weight: 700;
-    font-size: 22px;
-    line-height: 28px;
+    font-size: 16px;
+    line-height: 24px;
     color: #ffffff;
   }
   .wrap-form {
@@ -569,6 +573,7 @@
   }
   .wrap-title, .wrap-btn-login {
     text-align: center;
+    text-transform: uppercase;
   }
   .wrap-contact-info {
     max-width: 1366px !important;
@@ -579,15 +584,18 @@
     color: #ffffff !important;
   }
   .img-login-logo {
-    width: 85px;
+    width: 65px;
   }
   .wrap-title {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 0px;
   }
   @media screen and (max-width: 426px) {
+    .action-title {
+      display: none;
+    }
     .img-login-logo {
-      width: 65px;
+      width: 50px;
     }
     .container-wrap {
       padding: 8px;
@@ -595,11 +603,11 @@
     }
     .wrap-title {
       text-align: center;
-      margin-top: 10px;
+      margin-top: 0px;
     }
     #login-page .text-1 {
-      font-size: 18px;
-      margin-bottom: 10px;
+      font-size: 16px;
+      margin-bottom: 5px;
     }
     #login-page .text-2 {
       font-size: 16px;
@@ -609,7 +617,7 @@
     }
     .wrap-form {
       margin: 0 10px;
-      margin-top: 25px;
+      margin-top: 10px;
     }
     .wrap-contact-info {
       left: 15px;
@@ -622,13 +630,14 @@
     }
     .wrap-title {
       text-align: center;
-      margin-top: 10px;
+      margin-top: 0px;
     }
     .wrap-form {
-      margin-top: 30px;
+      margin-top: 15px;
+      padding-top: 24px !important;
     }
     #login-page .text-1 {
-      font-size: 20px;
+      font-size: 18px;
     }
     .wrap-contact-info {
       left: 50px;
@@ -638,14 +647,14 @@
   @media screen and (min-width: 769px) and (max-width: 1025px){
     .container-wrap {
       padding: 8px;
-      margin-top: 20px;
+      margin-top: 0px;
     }
     .wrap-title {
       text-align: center;
-      margin-top: 10px;
+      margin-top: 0px;
     }
     .wrap-form {
-      margin-top: 30px;
+      margin-top: 15px;
     }
     .wrap-contact-info {
       left: 50px;

@@ -166,14 +166,14 @@
               </template>
               <span>Sửa</span>
             </v-tooltip>
-            <v-tooltip top>
+            <!-- <v-tooltip top>
               <template v-slot:activator="{ on, attrs }">
                 <v-btn small @click.stop="deleteCanBo(item)" color="red" text icon class="" v-bind="attrs" v-on="on">
                   <v-icon size="22">mdi-delete</v-icon>
                 </v-btn>
               </template>
               <span>Xóa</span>
-            </v-tooltip>
+            </v-tooltip> -->
           </div>
         </template>
       </v-data-table>
@@ -268,7 +268,7 @@
                 </v-autocomplete>
               </v-col>
               <v-col cols="12" md="6" class="py-0 mb-2">
-                <label>Email</label>
+                <label>Email <span class="red--text">(*)</span></label>
                 <v-text-field
                   class="input-form"
                   v-model="thongTinCanBo.danhBaLienLac['thuDienTu']"
@@ -277,6 +277,8 @@
                   clearable
                   max
                   hide-details="auto"
+                  :rules="required"
+                  required
                 ></v-text-field>
               </v-col>
               <v-col cols="12" md="6" class="py-0">
@@ -1299,8 +1301,18 @@
           let chucVu = vm.chucVu.filter(function (item) {
             return item.maDinhDanh
           })
-          if (chucVu && chucVu.length) {
-            chucVuOutput = Array.from(chucVu, function (item) {
+          let chucVuExits = []
+          for (let index = 0; index < chucVu.length; index++) {
+            let element = chucVu[index]
+            let findChucVu = vm.itemsChucVu.find(function (item) {
+              return item.maDinhDanh == element.maDinhDanh
+            })
+            if (findChucVu) {
+              chucVuExits.push(element)
+            }
+          }
+          if (chucVuExits && chucVuExits.length) {
+            chucVuOutput = Array.from(chucVuExits, function (item) {
               return {maDinhDanh: item.maDinhDanh, tenGoi: item.tenGoi}
             })
           }

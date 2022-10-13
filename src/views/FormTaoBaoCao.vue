@@ -6,7 +6,8 @@
     <v-row justify="end" class="mt-0 mb-0 mx-0" style="border-bottom: 1px solid #2161B1">
       <v-col class="d-flex align-center justify-start py-0 px-0" style="color: #2161B1;font-weight: 500;">
         <div class="header-content">
-          TẠO BÁO CÁO
+          <span>TẠO BÁO CÁO</span>
+          <i>(CREATING REPORT)</i>
         </div>
         <div class="triangle-header"></div>
       </v-col>
@@ -76,11 +77,11 @@
         <!--  -->
         <v-col cols="12" class="py-0 px-0 mb-2 col col-12 my-2">
           <div class="background-triangle-small"> <v-icon size="20" color="white">mdi-view-dashboard-outline</v-icon></div>
-          Loại báo cáo  
+          Loại báo cáo (Type of report)
         </v-col>
         <v-layout wrap class="px-0 py-2 mx-3 mt-2" style="border: 1px solid #dedede">
           <v-col cols="12" md="5" class="py-0 mb-2">
-            <label>Loại báo cáo <span class="red--text">(*)</span></label>
+            <label>Loại báo cáo (Type of report)<span class="red--text">(*)</span></label>
             <v-autocomplete
               class="flex input-form"
               hide-no-data
@@ -126,20 +127,25 @@
               class="mb-3"
               hide-details
               v-model="item.selected"
-              :label="item.tenGoi"
               :value="true"
               @change="changeDanhSachMau"
-            ></v-checkbox>
+            >
+              <template v-slot:label>
+                <span>{{item.maMauBaoCao}}</span>
+                <span>&nbsp;-&nbsp;</span>
+                <span>{{item.tenGoi}}</span>
+              </template>
+            </v-checkbox>
           </v-container>
         </v-layout>
         <!--  -->
         <v-col cols="12" class="py-0 px-0 mb-2 col col-12 my-2">
           <div class="background-triangle-small"> <v-icon size="20" color="white">mdi-view-dashboard-outline</v-icon></div>
-          Đơn vị được giao
+          Đơn vị được giao (Sub-agency in charge)
         </v-col>
         <v-layout wrap class="px-0 py-2 mx-3 mt-2" style="border: 1px solid #dedede">
           <v-col cols="12" md="5" class="py-0 mb-2">
-            <label>Đơn vị được giao <span class="red--text">(*)</span></label>
+            <label>Đơn vị được giao (Sub-agency in charge) <span class="red--text">(*)</span></label>
             <v-autocomplete
               class="flex input-form"
               hide-no-data
@@ -205,7 +211,7 @@
             <v-icon left dark size="20">
               mdi-file-upload-outline
             </v-icon>
-            Tạo và giao báo cáo
+            Tạo và giao báo cáo (Create and deliver report)
           </v-btn>
       </v-col>
       </v-layout>
@@ -215,7 +221,6 @@
 </template>
 
 <script>
-import Vue from 'vue'
 import toastr from 'toastr'
 toastr.options = {
   'closeButton': true,
@@ -334,7 +339,7 @@ export default {
         let filter = {
           collectionName: 'maubaocao',
           data: {
-            orderFields: 'tenGoi',
+            orderFields: 'maMauBaoCao',
             orderTypes: 'asc',
             nhomBaoCao_maMuc: vm.nhomBaoCao ? vm.nhomBaoCao.maMuc : '',
             page: 0,
@@ -506,7 +511,7 @@ export default {
                   "hanXuLy": vm.convertDate(vm.hanXuLy),
                   "mauBaoCao": maubaocao,
                   "coQuanThucHien": donvi,
-                  "namBaoCao": vm.namBaoCao.maMuc,
+                  "nam": vm.namBaoCao.maMuc,
                   "tienTrinh": tienTrinh
                 }
               }

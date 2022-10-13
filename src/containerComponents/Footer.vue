@@ -103,6 +103,9 @@
     #footer, #footer .container {
       height: 56px
     }
+    #footer .text-1 {
+      width: 100%;
+    }
     #footer .text-2, #footer .text-3 {
       text-align: left;
       margin-top: 5px;

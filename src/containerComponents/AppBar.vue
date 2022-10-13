@@ -8,7 +8,8 @@
             <img class="logo-banner" :src="`${publicPath}/images/image-logo.png`">
           </a>
           <div class="title-banner">
-            HỆ THỐNG GIÁM SÁT VÀ ĐÁNH GIÁ THÍCH ỨNG BIẾN ĐỔI KHÍ HẬU - BỘ GIAO THÔNG VẬN TẢI
+            <div class="title-banner-vi">HỆ THỐNG GIÁM SÁT VÀ ĐÁNH GIÁ THÍCH ỨNG BIẾN ĐỔI KHÍ HẬU - BỘ GIAO THÔNG VẬN TẢI</div>
+            <div class="title-banner-en">Monitoring and evaluation system for climate change adaptation activities - Ministry of Transport</div>
           </div>
         </div>
       </header>
@@ -128,18 +129,23 @@
     flex-wrap: wrap;
     align-content: center;
   }
+  .title-banner-en {
+    font-size: 12px;
+  }
   .logo-banner {
-    width: 36px;
-    height: 36px;
+    width: 42px;
+    height: 42px;
     margin-right: 13px;
   }
   .title-banner {
     display: flex;
-    font-family: Roboto Slab;
+    font-family: "Roboto Slab";
     font-style: normal;
     font-weight: bold;
-    font-size: 18px;
-    line-height: 36px;
+    font-size: 16px;
+    flex-direction: column;
+    line-height: 24px;
+    padding-top: 3px;
     color: #FFFFFF;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -223,7 +229,10 @@
     display: none;
   }
   @media screen and (max-width: 426px){
-    
+    .title-banner-en {
+      display: none;
+      font-size: 12px;
+    }
   }
   @media screen and (max-width: 769px){
     header {
@@ -247,14 +256,21 @@
       line-height: 18px;
       align-content: center;
     }
+    .title-banner-en {
+      font-size: 12px;
+    }
     .btn-visible-drawer {
       display: block;
     }
   }
   @media screen and (min-width: 769px) and (max-width: 1025px){
     .title-banner {
-      font-size: 16px;
+      font-size: 14px;
+      letter-spacing: normal;
       align-content: center;
+    }
+    .title-banner-en {
+      font-size: 12px;
     }
   }
 </style>

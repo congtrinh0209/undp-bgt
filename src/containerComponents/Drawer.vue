@@ -109,6 +109,20 @@
         </v-list-item-content>
       </v-list-item>
       <!--  -->
+      <v-list-item v-if="isAdmin || checkRole('TONGHOPBAOCAO')" :class="menuName === 'ThongKe' ? 'item-active' : ''" class="mb-3 list-menu" @click.stop="goToPage('/thong-ke')">
+        <v-list-item-icon >
+          <v-tooltip top color="#0073C8">
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon v-bind="attrs" v-on="on" class="icon-draw" style="font-size: 24px !important">mdi-chart-bar</v-icon>
+            </template>
+            <span>Tổng hợp báo cáo</span>
+          </v-tooltip>
+        </v-list-item-icon>
+        <v-list-item-content>
+          <v-list-item-title class="text-drawer text-list">Tổng hợp báo cáo</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+      <!--  -->
       <v-list-item v-if="isAdmin || checkRole('XEMBAOCAODONVI') || checkRole('XEMTATCABAOCAO')" :class="menuName === 'TraCuu' ? 'item-active' : ''" class="mb-3 list-menu" @click.stop="goToPage('/bao-cao/tra-cuu')">
         <v-list-item-icon >
           <v-tooltip top color="#0073C8">
@@ -122,7 +136,6 @@
           <v-list-item-title class="text-drawer text-list">Tra cứu</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
-      <!--  -->
       <!-- <v-list-item :class="menuName === 'TongHopBaoCao' ? 'item-active' : ''" class="mb-3 list-menu" >
         <v-list-item-icon >
           <v-tooltip top color="#0073C8">
@@ -237,6 +250,9 @@
       if (currentQuery.name == 'ThongTinCanBo') {
         vm.menuName = 'CanBo'
       }
+      if (currentQuery.name == 'ThongKe') {
+        vm.menuName = 'ThongKe'
+      }
       if (currentQuery.params.hasOwnProperty('type') && currentQuery.params.type == 'cho-xu-ly') {
         vm.menuName = 'BaoCaoChoXuLy'
       }
@@ -280,6 +296,9 @@
         }
         if (newRoute.name == 'ThongTinCanBo') {
           vm.menuName = 'CanBo'
+        }
+        if (newRoute.name == 'ThongKe') {
+          vm.menuName = 'ThongKe'
         }
         if (newRoute.params.hasOwnProperty('type') && newRoute.params.type == 'cho-xu-ly') {
           vm.menuName = 'BaoCaoChoXuLy'
