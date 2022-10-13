@@ -10,14 +10,17 @@
         <div class="wrap-title">
           <v-flex style="text-align: center;">
             <img class="img-login-logo" :src="`${publicPath}/images/image-logo.png?t=93111413`">
+            <div>
+              <button v-for="entry in languages" :key="entry.title" @click="changeLocale(entry.language)">
+                <flag :iso="entry.flag" v-bind:squared=false />
+                {{entry.title}}
+              </button>
+            </div>
           </v-flex>
+          
           <v-flex class="wrap-title pt-1 mb-2">
-            <div class="text-1">HỆ THỐNG GIÁM SÁT VÀ ĐÁNH GIÁ THÍCH ỨNG BIẾN ĐỔI KHÍ HẬU</div>
-            <div class="text-2">BỘ GIAO THÔNG VẬN TẢI</div>
-          </v-flex>
-          <v-flex class="wrap-title pt-1">
-            <div class="text-1">Monitoring and evaluation system for climate change adaptation activities</div>
-            <div class="text-2">Ministry of Transport</div>
+            <div class="text-1">{{ $t('welcomeMsg1')}} </div>
+            <div class="text-2">{{ $t('welcomeMsg2')}}</div>
           </v-flex>
         </div>
 
@@ -139,6 +142,8 @@
   import Vue from 'vue'
   import axios from 'axios'
   import toastr from 'toastr'
+  import i18n from '@/plugins/i18n'
+
   toastr.options = {
     'closeButton': true,
     'timeOut': '5000',
@@ -157,7 +162,11 @@
       password: '',
       client_secret: '',
       code: '',
-      signed: false
+      signed: false,
+      languages: [
+        { flag: 'vn', language: 'vi', title: 'Tiếng Việt' },
+        { flag: 'us', language: 'en', title: 'English' },
+      ],
     }),
     created () {
       let vm = this
@@ -181,6 +190,9 @@
     computed: {
     },
     methods: {
+      changeLocale(locale) {
+        i18n.locale = locale;
+      },
       login () {
         let vm = this
         if (vm.loading || !vm.userName || !vm.password) {
@@ -659,5 +671,13 @@
     .wrap-contact-info {
       left: 50px;
     }
+  }
+  button {
+    text-align: right;
+    padding: 5px;
+    font-size: 15px;
+    color: white;
+    margin: 5px;
+  
   }
 </style>
