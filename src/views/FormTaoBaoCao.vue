@@ -6,8 +6,7 @@
     <v-row justify="end" class="mt-0 mb-0 mx-0" style="border-bottom: 1px solid #2161B1">
       <v-col class="d-flex align-center justify-start py-0 px-0" style="color: #2161B1;font-weight: 500;">
         <div class="header-content">
-          <span>TẠO BÁO CÁO</span>
-          <i>(CREATING REPORT)</i>
+          <span>{{ $t('formTaoBaoCao.headercontent') }}</span>
         </div>
         <div class="triangle-header"></div>
       </v-col>
@@ -21,7 +20,7 @@
     >
       <v-layout wrap>
         <v-col cols="12" md="4" class="py-0 mb-2">
-          <label>Kỳ báo cáo <span class="red--text">(*)</span></label>
+          <label>{{ $t('formTaoBaoCao.kyBaoCao') }} <span class="red--text">(*)</span></label>
           <v-autocomplete
             class="flex input-form"
             hide-no-data
@@ -40,7 +39,7 @@
           </v-autocomplete>
         </v-col>
         <v-col cols="12" md="4" class="py-0 mb-2">
-          <label>Năm báo cáo <span class="red--text">(*)</span></label>
+          <label>{{ $t('formTaoBaoCao.namBaoCao') }} <span class="red--text">(*)</span></label>
           <v-autocomplete
             class="flex input-form"
             hide-no-data
@@ -59,7 +58,7 @@
           </v-autocomplete>
         </v-col>
         <v-col cols="12" md="4" class="py-0 mb-2">
-          <label>Hạn xử lý <span class="red--text">(*)</span></label>
+          <label>{{ $t('formTaoBaoCao.hanXuLy') }} <span class="red--text">(*)</span></label>
           <v-text-field
             class="flex input-form"
             v-model="hanXuLy"
@@ -77,11 +76,11 @@
         <!--  -->
         <v-col cols="12" class="py-0 px-0 mb-2 col col-12 my-2">
           <div class="background-triangle-small"> <v-icon size="20" color="white">mdi-view-dashboard-outline</v-icon></div>
-          Loại báo cáo (Type of report)
+          {{ $t('formTaoBaoCao.loaiBaoCao') }}
         </v-col>
         <v-layout wrap class="px-0 py-2 mx-3 mt-2" style="border: 1px solid #dedede">
           <v-col cols="12" md="5" class="py-0 mb-2">
-            <label>Loại báo cáo (Type of report)<span class="red--text">(*)</span></label>
+            <label>{{ $t('formTaoBaoCao.loaiBaoCao') }}<span class="red--text">(*)</span></label>
             <v-autocomplete
               class="flex input-form"
               hide-no-data
@@ -93,6 +92,7 @@
               solo
               hide-details="auto"
               return-object
+              v-bind:placeholder="$t('formTaoBaoCao.chonNhomBaoCao')"
               clearable
               @change="getDanhSachMauBaoCao"
             >
@@ -103,19 +103,19 @@
               <v-icon left dark size="18">
                 mdi-check-all
               </v-icon>
-              Chọn tất cả
+              {{$t('formTaoBaoCao.chonTatCa') }}
             </v-btn>
             <v-btn small color="primary" class="mx-2  text-white" @click.native="toggleTatCaBaoCao('null')">
               <v-icon left dark size="18">
                 mdi-close-circle
               </v-icon>
-              Bỏ tất cả
+              {{$t('formTaoBaoCao.boTatCa') }}
             </v-btn>
             <v-checkbox v-model="filterMauDaChon" color="primary" class="d-inline-flex checkbox-loaibaocao" hide-details style="margin-top: 0">
-              <template v-slot:label>Đã chọn &nbsp;<span style="color: green">({{counterBaoCaoDaChon}})</span></template>
+              <template v-slot:label>{{ $t('formTaoBaoCao.daChon') }} &nbsp;<span style="color: green">({{counterBaoCaoDaChon}})</span></template>
             </v-checkbox>
             <v-checkbox v-model="filterMauChuaChon" color="primary" class="d-inline-flex checkbox-loaibaocao" hide-details style="margin-top: 0">
-              <template v-slot:label>Chưa chọn &nbsp;<span style="color: red">({{counterBaoCaoChuaChon}})</span></template>
+              <template v-slot:label>{{ $t('formTaoBaoCao.chuaChon') }}  &nbsp;<span style="color: red">({{counterBaoCaoChuaChon}})</span></template>
             </v-checkbox>
           </v-col>
         </v-layout>
@@ -141,11 +141,11 @@
         <!--  -->
         <v-col cols="12" class="py-0 px-0 mb-2 col col-12 my-2">
           <div class="background-triangle-small"> <v-icon size="20" color="white">mdi-view-dashboard-outline</v-icon></div>
-          Đơn vị được giao (Sub-agency in charge)
+          {{ $t('formTaoBaoCao.donViDuocGiao') }}
         </v-col>
         <v-layout wrap class="px-0 py-2 mx-3 mt-2" style="border: 1px solid #dedede">
           <v-col cols="12" md="5" class="py-0 mb-2">
-            <label>Đơn vị được giao (Sub-agency in charge) <span class="red--text">(*)</span></label>
+            <label>{{ $t('formTaoBaoCao.donViDuocGiao') }} <span class="red--text">(*)</span></label>
             <v-autocomplete
               class="flex input-form"
               hide-no-data
@@ -158,7 +158,7 @@
               hide-details="auto"
               return-object
               clearable
-              placeholder="Chọn nhóm đơn vị"
+              v-bind:placeholder="$t('formTaoBaoCao.chonNhomDonVi')"
               @change="getDanhSachDonVi"
             >
             </v-autocomplete>
@@ -168,19 +168,19 @@
               <v-icon left dark size="18">
                 mdi-check-all
               </v-icon>
-              Chọn tất cả
+              {{$t('formTaoBaoCao.chonTatCa') }}
             </v-btn>
             <v-btn small color="primary" class="mx-2  text-white" @click.native="toggleTatCaDonVi('null')">
               <v-icon left dark size="18">
                 mdi-close-circle
               </v-icon>
-              Bỏ tất cả
+              {{$t('formTaoBaoCao.boTatCa') }}
             </v-btn>
             <v-checkbox v-model="filterDonViDaChon" color="primary" class="d-inline-flex checkbox-donvi" hide-details style="margin-top: 0">
-              <template v-slot:label>Đã chọn &nbsp;<span style="color: green">({{counterDonViDaChon}})</span></template>
+              <template v-slot:label>{{ $t('formTaoBaoCao.daChon') }}  &nbsp;<span style="color: green">({{counterDonViDaChon}})</span></template>
             </v-checkbox>
             <v-checkbox v-model="filterDonViChuaChon" color="primary" class="d-inline-flex checkbox-donvi" hide-details style="margin-top: 0">
-              <template v-slot:label>Chưa chọn &nbsp;<span style="color: red">({{counterDonViChuaChon}})</span></template>
+              <template v-slot:label>{{ $t('formTaoBaoCao.chuaChon') }}  &nbsp;<span style="color: red">({{counterDonViChuaChon}})</span></template>
             </v-checkbox>
           </v-col>
         </v-layout>
@@ -211,7 +211,7 @@
             <v-icon left dark size="20">
               mdi-file-upload-outline
             </v-icon>
-            Tạo và giao báo cáo (Create and deliver report)
+            {{ $t('formTaoBaoCao.taoVaGiaoBaoCao') }}
           </v-btn>
       </v-col>
       </v-layout>
@@ -221,12 +221,14 @@
 </template>
 
 <script>
+import i18n from '@/plugins/i18n'
 import toastr from 'toastr'
 toastr.options = {
   'closeButton': true,
   'timeOut': '5000',
   "positionClass": "toast-top-center"
 }
+
 export default {
     props: ["id"],
     components: {
@@ -257,7 +259,7 @@ export default {
         counterDonViDaChon: 0,
         counterDonViChuaChon: 0,
         required: [
-          v => (v !== '' && v !== null && v !== undefined) || 'Thông tin bắt buộc'
+          v => (v !== '' && v !== null && v !== undefined) || i18n.t('thongTinBatBuoc') 
         ],
       }
     },

@@ -22,7 +22,7 @@
             dense
             hide-details="auto"
             :clearable="!readonly"
-            :rules="item.required ? [v => (v !== '' && v !== null && v !== undefined) || 'Thông tin bắt buộc'] : []"
+            :rules="item.required ? [v => (v !== '' && v !== null && v !== undefined) || $t('basic.thongTinBatBuoc')] : []"
           ></v-text-field>
           <v-textarea
             v-if="item.type === 'textarea'"
@@ -34,7 +34,7 @@
             hide-details="auto"
             :clearable="!readonly"
             :rows="item.hasOwnProperty('rows') ? item.rows : 3"
-            :rules="item.required ? [v => (v !== '' && v !== null && v !== undefined) || 'Thông tin bắt buộc'] : []"
+            :rules="item.required ? [v => (v !== '' && v !== null && v !== undefined) || $t('basic.thongTinBatBuoc')] : []"
           ></v-textarea>
 
           <v-text-field
@@ -49,7 +49,7 @@
             dense
             hide-details="auto"
             :clearable="!readonly"
-            :rules="item.required ? [v => (v !== '' && v !== null && v !== undefined) || 'Thông tin bắt buộc'] : []"
+            :rules="item.required ? [v => (v !== '' && v !== null && v !== undefined) || $t('basic.thongTinBatBuoc')] : []"
           ></v-text-field>
           <v-text-field
             v-if="item.type === 'money'"
@@ -61,7 +61,7 @@
             dense
             hide-details="auto"
             :clearable="!readonly"
-            :rules="item.required ? [v => (v !== '' && v !== null && v !== undefined) || 'Thông tin bắt buộc'] : []"
+            :rules="item.required ? [v => (v !== '' && v !== null && v !== undefined) || $t('basic.thongTinBatBuoc')] : []"
           ></v-text-field>
           <v-autocomplete
             v-if="item.type === 'select' && !item.api"
@@ -77,7 +77,7 @@
             hide-details="auto"
             return-object
             :clearable="!readonly"
-            :rules="item.required ? [v => (v !== '' && v !== null && v !== undefined) || 'Thông tin bắt buộc'] : []"
+            :rules="item.required ? [v => (v !== '' && v !== null && v !== undefined) || $t('basic.thongTinBatBuoc')] : []"
           >
           </v-autocomplete>
           <v-autocomplete
@@ -94,7 +94,7 @@
             hide-details="auto"
             return-object
             :clearable="!readonly"
-            :rules="item.required ? [v => (v !== '' && v !== null && v !== undefined) || 'Thông tin bắt buộc'] : []"
+            :rules="item.required ? [v => (v !== '' && v !== null && v !== undefined) || $t('basic.thongTinBatBuoc')] : []"
           >
           </v-autocomplete>
 
@@ -122,12 +122,12 @@
                       <v-icon size="18">mdi-close-circle</v-icon>
                     </v-btn>
                   </template>
-                  <span>Xóa</span>
+                  <span>{{ $t('basic.xoa')}}</span>
                 </v-tooltip>
               </div>
             </div>
             <div v-else>
-              <span>Không có giấy tờ đính kèm!</span>
+              <span>{{ $t('formThemThanhPhan.khongCoGiayToDinhKem')}}</span>
             </div>
             <v-btn
               v-if="!readonly"
@@ -137,7 +137,7 @@
               @click.stop="pickFileUpload()"
             >
               <v-icon size="18">mdi-cloud-upload-outline</v-icon>&nbsp;
-              Tải lên tài liệu đính kèm
+              {{ $t('formThemThanhPhan.taiLenTaiLieuDinhKem')}}
             </v-btn>
           </div>
         </div>
@@ -166,10 +166,10 @@ export default {
         validFormAdd: false,
         data: {},
         required: [
-          v => (v !== '' && v !== null && v !== undefined) || 'Thông tin bắt buộc'
+          v => (v !== '' && v !== null && v !== undefined) || $t('basic.thongTinBatBuoc')
         ],
         rules: {
-          required: value => !!value || 'Thông tin bắt buộc'
+          required: value => !!value || $t('basic.thongTinBatBuoc')
         },
         fileUpload: []
       }

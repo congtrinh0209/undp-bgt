@@ -1,7 +1,7 @@
 <template>
 <v-layout wrap class="mt-4">
   <div v-if="showTong" class="flex" style="max-width: 200px;color: #2161B1;font-weight: 500;">
-    <span>TỔNG SỐ:</span>&nbsp;
+    <span>{{ $t('pagination.tongSo')}}:</span>&nbsp;
     <span>{{total}}</span>
   </div>
   <div class="flex text-center">
@@ -46,6 +46,8 @@
 </template>
 
 <script>
+import i18n from '@/plugins/i18n'
+
   export default {
     name: 'Search',
     props: {
@@ -80,7 +82,7 @@
       vm.currentPagePagination = vm.currentPage + 1
       for (let i = 1; i <= vm.pageCount; i++) {
         let item = {
-          name: 'Trang ' + i,
+          name: i18n.t('pagination.page') +' '+ i,
           value: i
         }
         vm.listPage.push(item)
@@ -95,7 +97,7 @@
           let vm = this
           for (let i = 1; i <= val; i++) {
             let item = {
-              name: 'Trang ' + i,
+              name: i18n.t('pagination.page') +' '+ i,
               value: i
             }
             vm.listPage.push(item)

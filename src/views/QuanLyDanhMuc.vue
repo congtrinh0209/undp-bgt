@@ -8,7 +8,7 @@
     <v-row justify="end" class="mt-0 mb-0 mx-0" style="border-bottom: 1px solid #2161B1">
       <v-col class="d-flex align-center justify-start py-0 px-0" style="color: #2161B1;font-weight: 500;">
         <div class="header-content">
-          DỮ LIỆU DANH MỤC
+          {{ $t('quanLyDanhMuc.headercontent')}}
         </div>
         <div class="triangle-header"></div>
       </v-col>
@@ -95,8 +95,7 @@
               class="input-form"
               dense
               solo
-              placeholder="Nhập mã danh mục hoặc tên danh mục"
-              v-model="dictName"
+              v-bind:placeholder="$t('quanLyDanhMuc.nhapMaDanhMuc')"              v-model="dictName"
               @keyup.enter="getDanhMuc"
               hide-details="auto"
               height="32px"
@@ -141,7 +140,7 @@
             </v-btn> -->
             <v-btn small @click="getDanhMuc('reset')" color="primary" class="mx-0 text-white" style="float: right;">
               <v-icon size="18">mdi-magnify</v-icon>&nbsp;
-              Tìm kiếm
+              {{ $t('basic.timKiem')}}
             </v-btn>
           </v-flex>
         </v-layout>

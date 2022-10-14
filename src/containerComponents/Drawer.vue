@@ -47,11 +47,11 @@
             <template v-slot:activator="{ on, attrs }">
               <v-icon v-bind="attrs" v-on="on" class="icon-draw" style="font-size: 24px !important">mdi-file-document-plus-outline</v-icon>
             </template>
-            <span>Tạo báo cáo</span>
+            <span>{{ $t('drawer.taoBaoCao') }}</span>
           </v-tooltip>
         </v-list-item-icon>
         <v-list-item-content>
-          <v-list-item-title class="text-drawer text-list">Tạo báo cáo</v-list-item-title>
+          <v-list-item-title class="text-drawer text-list">{{ $t('drawer.taoBaoCao') }}</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
       <!--  -->
@@ -75,11 +75,11 @@
             <template v-slot:activator="{ on, attrs }">
               <v-icon v-bind="attrs" v-on="on" class="icon-draw" style="font-size: 24px !important">mdi-file-arrow-left-right-outline</v-icon>
             </template>
-            <span>Báo cáo chờ xử lý</span>
+            <span>{{ $t('drawer.baoCaoChoXuLy') }}</span>
           </v-tooltip>
         </v-list-item-icon>
         <v-list-item-content>
-          <v-list-item-title class="text-drawer text-list">Báo cáo chờ xử lý</v-list-item-title>
+          <v-list-item-title class="text-drawer text-list">{{ $t('drawer.baoCaoChoXuLy') }}</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
       <v-list-item v-if="isAdmin || checkRole('XEMBAOCAODONVI') || checkRole('XEMTATCABAOCAO')" :class="menuName === 'BaoCaoXuLyLai' ? 'item-active' : ''" class="mb-3 list-menu" @click.stop="goToPage('/bao-cao/xu-ly-lai')">
@@ -88,11 +88,11 @@
             <template v-slot:activator="{ on, attrs }">
               <v-icon v-bind="attrs" v-on="on" class="icon-draw" style="font-size: 24px !important">mdi-ballot-recount-outline</v-icon>
             </template>
-            <span>Báo cáo xử lý lại</span>
+            <span>{{ $t('drawer.baoCaoXuLyLai') }}</span>
           </v-tooltip>
         </v-list-item-icon>
         <v-list-item-content>
-          <v-list-item-title class="text-drawer text-list">Báo cáo xử lý lại</v-list-item-title>
+          <v-list-item-title class="text-drawer text-list">{{ $t('drawer.baoCaoXuLyLai') }}</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
       <v-list-item v-if="isAdmin || checkRole('XEMBAOCAODONVI') || checkRole('XEMTATCABAOCAO')" :class="menuName === 'BaoCaoChoDuyet' ? 'item-active' : ''" class="mb-3 list-menu" @click.stop="goToPage('/bao-cao/cho-duyet')">
@@ -101,11 +101,11 @@
             <template v-slot:activator="{ on, attrs }">
               <v-icon v-bind="attrs" v-on="on" class="icon-draw" style="font-size: 24px !important">mdi-file-clock-outline</v-icon>
             </template>
-            <span>Báo cáo chờ duyệt</span>
+            <span>{{ $t('drawer.baoCaoChoDuyet') }}</span>
           </v-tooltip>
         </v-list-item-icon>
         <v-list-item-content>
-          <v-list-item-title class="text-drawer text-list">Báo cáo chờ duyệt</v-list-item-title>
+          <v-list-item-title class="text-drawer text-list">{{ $t('drawer.baoCaoChoDuyet') }}</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
       <!--  -->
@@ -115,11 +115,11 @@
             <template v-slot:activator="{ on, attrs }">
               <v-icon v-bind="attrs" v-on="on" class="icon-draw" style="font-size: 24px !important">mdi-chart-bar</v-icon>
             </template>
-            <span>Tổng hợp báo cáo</span>
+            <span>{{ $t('drawer.tongHopBaoCao') }}</span>
           </v-tooltip>
         </v-list-item-icon>
         <v-list-item-content>
-          <v-list-item-title class="text-drawer text-list">Tổng hợp báo cáo</v-list-item-title>
+          <v-list-item-title class="text-drawer text-list">{{ $t('drawer.tongHopBaoCao') }}</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
       <!--  -->
@@ -129,11 +129,11 @@
             <template v-slot:activator="{ on, attrs }">
               <v-icon v-bind="attrs" v-on="on" class="icon-draw" style="font-size: 24px !important">mdi-text-box-search-outline</v-icon>
             </template>
-            <span>Tra cứu báo cáo</span>
+            <span>{{ $t('drawer.traCuu') }}</span>
           </v-tooltip>
         </v-list-item-icon>
         <v-list-item-content>
-          <v-list-item-title class="text-drawer text-list">Tra cứu</v-list-item-title>
+          <v-list-item-title class="text-drawer text-list">{{ $t('drawer.traCuu') }}</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
       <!-- <v-list-item :class="menuName === 'TongHopBaoCao' ? 'item-active' : ''" class="mb-3 list-menu" >
@@ -156,12 +156,12 @@
             <template v-slot:activator="{ on, attrs }">
               <v-icon v-bind="attrs" v-on="on" class="icon-draw" style="font-size: 24px !important">mdi-bank</v-icon>
             </template>
-            <span>Cơ quan, đơn vị</span>
+            <span>{{ $t('drawer.coQuanDonVi') }}</span>
           </v-tooltip>
         </v-list-item-icon>
         
         <v-list-item-content>
-          <v-list-item-title class="text-drawer text-list">Cơ quan, đơn vị</v-list-item-title>
+          <v-list-item-title class="text-drawer text-list">{{ $t('drawer.coQuanDonVi') }}</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
       <!--  -->
@@ -171,11 +171,11 @@
             <template v-slot:activator="{ on, attrs }">
               <v-icon v-bind="attrs" v-on="on" class="icon-draw" style="font-size: 24px !important">mdi-account-multiple-plus-outline</v-icon>
             </template>
-            <span>Cán bộ</span>
+            <span>{{ $t('drawer.canBo') }}</span>
           </v-tooltip>
         </v-list-item-icon>
         <v-list-item-content>
-          <v-list-item-title class="text-drawer text-list">Cán bộ</v-list-item-title>
+          <v-list-item-title class="text-drawer text-list">{{ $t('drawer.canBo') }}</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
       <!--  -->
@@ -185,11 +185,11 @@
             <template v-slot:activator="{ on, attrs }">
               <v-icon v-bind="attrs" v-on="on" class="icon-draw" style="font-size: 24px !important">mdi-badge-account-horizontal-outline</v-icon>
             </template>
-            <span>Chức vụ cán bộ</span>
+            <span>{{ $t('drawer.chucVuCanBo') }}</span>
           </v-tooltip>
         </v-list-item-icon>
         <v-list-item-content>
-          <v-list-item-title class="text-drawer text-list">Chức vụ cán bộ</v-list-item-title>
+          <v-list-item-title class="text-drawer text-list">{{ $t('drawer.chucVuCanBo') }}</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
       <!--  -->
@@ -199,11 +199,11 @@
             <template v-slot:activator="{ on, attrs }">
               <v-icon class="icon-draw" v-bind="attrs" v-on="on">mdi-format-list-text</v-icon>
             </template>
-            <span>Quản lý danh mục</span>
+            <span>{{ $t('drawer.quanLyDanhMuc') }}</span>
           </v-tooltip>
         </v-list-item-icon>
         <v-list-item-content>
-          <v-list-item-title class="text-drawer text-list">Quản lý danh mục</v-list-item-title>
+          <v-list-item-title class="text-drawer text-list">{{ $t('drawer.quanLyDanhMuc') }}</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
     </v-list>
@@ -212,10 +212,10 @@
         <v-tooltip top color="#0073C8">
           <template v-slot:activator="{ on, attrs }">
             <v-btn @click.stop="logout" v-bind="attrs" v-on="on" text style="padding-left: 0px !important;" class="px-2 ml-2">
-              <v-icon class="icon-draw" >mdi-logout-variant</v-icon> <span class="text-drawer ml-3">&nbsp; &nbsp;Đăng xuất</span>
+              <v-icon class="icon-draw" >mdi-logout-variant</v-icon> <span class="text-drawer ml-3">&nbsp; &nbsp;{{ $t('drawer.dangXuat') }}</span>
             </v-btn>
           </template>
-          <span class="ml-3">Đăng xuất</span>
+          <span class="ml-3">{{ $t('drawer.dangXuat') }}</span>
         </v-tooltip>
       </div>
     </template>
