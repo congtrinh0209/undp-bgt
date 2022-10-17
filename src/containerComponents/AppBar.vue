@@ -8,8 +8,13 @@
             <img class="logo-banner" :src="`${publicPath}/images/image-logo.png`">
           </a>
           <div class="title-banner">
-            <div class="title-banner-vi">HỆ THỐNG GIÁM SÁT VÀ ĐÁNH GIÁ THÍCH ỨNG BIẾN ĐỔI KHÍ HẬU - BỘ GIAO THÔNG VẬN TẢI</div>
-            <div class="title-banner-en">Monitoring and evaluation system for climate change adaptation activities - Ministry of Transport</div>
+            <span class="title-banner-vi">{{ $t('appbar.titlebanner') }}</span>
+          </div>
+          <div class="lang-btn">
+            <button v-for="entry in languages" :key="entry.title" @click="changeLocale(entry.language)">
+              <flag :iso="entry.flag" v-bind:squared=false />
+              <!-- {{entry.title}} -->
+            </button>
           </div>
         </div>
       </header>
@@ -18,6 +23,8 @@
 </template>
 
 <script>
+import i18n from '@/plugins/i18n'
+
   export default {
     name: 'AppBar',
     components: {
@@ -59,7 +66,11 @@
           id: 'danhmuc-tab-id',
           to: '/quan-ly-danh-muc'
         }
-      ]
+      ],
+      languages: [
+        { flag: 'vn', language: 'vi', title: 'Tiếng Việt' },
+        { flag: 'us', language: 'en', title: 'English' },
+      ],
     }),
     created () {
       let vm = this
@@ -75,6 +86,9 @@
     watch: {
     },
     methods: {
+      changeLocale(locale) {
+        i18n.locale = locale;
+      },
       changeDrawer () {
         let vm = this
         let drawer = vm.$store.state.drawer
@@ -142,8 +156,7 @@
     font-family: "Roboto Slab";
     font-style: normal;
     font-weight: bold;
-    font-size: 16px;
-    flex-direction: column;
+    font-size: 14px;
     line-height: 24px;
     padding-top: 3px;
     color: #FFFFFF;
@@ -154,6 +167,7 @@
     flex-wrap: wrap;
     text-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
   }
+  
   #header-nav {
     position: relative;
   }
@@ -272,6 +286,17 @@
     .title-banner-en {
       font-size: 12px;
     }
+  }
+  button {
+    padding: 3px;
+    font-size: 20px;
+    color: white;
+    margin: 3px;
+  }
+  .lang-btn {
+    margin-top: 5px;
+    margin-left: 90%;
+    position: absolute;
   }
 </style>
 

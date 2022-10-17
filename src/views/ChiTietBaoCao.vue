@@ -9,7 +9,7 @@
           <v-row justify="end" class="my-0 mx-0" style="border-bottom: 1px solid #2161B1">
             <v-col class="d-flex align-center justify-start py-0 px-0" style="color: #2161B1;font-weight: 500;">
               <div class="header-content">
-                Chi tiết báo cáo
+                {{ $t('chiTietBaoCao.headercontent')}}
               </div>
               <div class="triangle-header"></div>
             </v-col>
@@ -25,7 +25,7 @@
                 >
                 <v-icon size="18">mdi-reply-all</v-icon>
                 &nbsp;
-                Quay lại
+                {{ $t('basic.quayLai')}}
               </v-btn>
             </v-col>
           </v-row>
@@ -35,35 +35,35 @@
                 <div class="font-weight-bold" style="color: #2161B1;">{{chiTietBaoCao.tenBaoCao}}</div>
               </v-col>
               <v-col cols="12" md="3" class="pt-0">
-                <span class="label-header">Mã báo cáo: </span>
+                <span class="label-header">{{ $t('baoCaoTongHop.maBaoCao')}}: </span>
                 <span class="blue-text font-weight-bold">{{chiTietBaoCao.maBaoCao}}</span>
               </v-col>
               <v-col cols="12" md="3" class="pt-0">
-                <span class="label-header">Kỳ - năm báo cáo: </span>
+                <span class="label-header">{{ $t('baoCaoTongHop.kyBaoCao')}}: </span>
                 <span class="blue-text font-weight-bold">{{chiTietBaoCao.kyBaoCao ? chiTietBaoCao.kyBaoCao.tenMuc : ''}}</span>
                 <span class="blue-text font-weight-bold" v-if="chiTietBaoCao.nam"> - {{chiTietBaoCao.nam ? chiTietBaoCao.nam : ''}}</span>
               </v-col>
               <v-col cols="12" md="3" class="pt-0">
-                <span class="label-header">Đơn vị xử lý: </span>
+                <span class="label-header">{{ $t('baoCaoTongHop.donViDuocGiao')}}:  </span>
                 <span class="blue-text font-weight-bold">{{chiTietBaoCao.coQuanThucHien ? chiTietBaoCao.coQuanThucHien.tenGoi : ''}}</span>
               </v-col>
               <v-col cols="12" md="3" class="pt-0">
-                <span class="label-header">Tình trạng: </span>
+                <span class="label-header">{{ $t('baoCaoTongHop.tinhTrang')}}: </span>
                 <span class="blue-text font-weight-bold">{{chiTietBaoCao.tinhTrang ? chiTietBaoCao.tinhTrang.tenMuc : ''}}</span>
               </v-col>
               <v-col cols="12" md="3" class="pt-0">
-                <span class="label-header">Ngày tạo: </span>
+                <span class="label-header">{{ $t('baoCaoTongHop.ngayTao')}}: </span>
                 <span class="blue-text font-weight-bold">{{dateLocale(chiTietBaoCao.thoiGianTao)}}</span>
               </v-col>
               <v-col cols="12" md="3" class="pt-0">
-                <span class="label-header">Hạn xử lý: </span>
+                <span class="label-header">{{ $t('baoCaoTongHop.hanXuLy')}}: </span>
                 <span class="blue-text font-weight-bold">{{dateLocale(chiTietBaoCao.hanXuLy)}}</span>
               </v-col>
               
               <v-col cols="12" md="3" class="pt-0">
                 <div class="d-inline-block" @click="viewHistory">
                   <v-icon size="20" class="font-weight-bold" color="green">mdi-history</v-icon>
-                  <a class="ml-2 font-weight-bold" style="font-size: 14px;text-decoration: underline;color: green">Xem lịch sử thực hiện</a>
+                  <a class="ml-2 font-weight-bold" style="font-size: 14px;text-decoration: underline;color: green">{{ $t('chiTietBaoCao.xemLichSuThucHien')}}</a>
                 </div>
               </v-col>
               <!--  -->
@@ -88,7 +88,7 @@
           <v-row justify="end" class="my-0 mx-0 mt-3" style="border-bottom: 1px solid #2161B1">
             <v-col class="d-flex align-center justify-start py-0 px-0" style="color: #2161B1;font-weight: 500;">
               <div class="header-content">
-                Danh sách thành phần
+                {{ $t('chiTietBaoCao.danhSachThanhPhan')}}
               </div>
               <div class="triangle-header"></div>
             </v-col>
@@ -104,7 +104,7 @@
                 >
                 <v-icon size="18">mdi-file-document-plus-outline</v-icon>
                 &nbsp;
-                Thêm mới thành phần
+                {{ $t('chiTietBaoCao.themMoiThanhPhan')}}
               </v-btn>
             </v-col>
           </v-row>
@@ -154,7 +154,7 @@
                                 <v-icon size="18">mdi-file-document-multiple-outline</v-icon>
                               </v-btn>
                             </template>
-                            <span>Chi tiết thành phần</span>
+                            <span>{{ $t('chiTietBaoCao.chiTietThanhPhan')}}</span>
                           </v-tooltip>
                           <v-tooltip top v-if="isAdmin || checkRole('CAPNHATBAOCAO')">
                             <template v-slot:activator="{ on, attrs }">
@@ -162,7 +162,7 @@
                                 <v-icon size="18">mdi-pencil</v-icon>
                               </v-btn>
                             </template>
-                            <span>Sửa</span>
+                            <span>{{ $t('basic.sua')}}</span>
                           </v-tooltip>
                           <v-tooltip top v-if="isAdmin || checkRole('CAPNHATBAOCAO')">
                             <template v-slot:activator="{ on, attrs }">
@@ -170,7 +170,7 @@
                                 <v-icon size="18">mdi-delete</v-icon>
                               </v-btn>
                             </template>
-                            <span>Xóa</span>
+                            <span>{{ $t('basic.xoa')}}</span>
                           </v-tooltip>
                         </div>
                         <div v-else :style="itemHeader.hasOwnProperty('style') ? itemHeader.style : ''">
@@ -200,9 +200,9 @@
           color="primary"
           class="px-3"
         >
-          <v-toolbar-title v-if="readonlyForm && editThanhPhan === null">THÔNG TIN THÀNH PHẦN BÁO CÁO</v-toolbar-title>
-          <v-toolbar-title v-if="editThanhPhan === true && !readonlyForm">CẬP NHẬT THÀNH PHẦN BÁO CÁO</v-toolbar-title>
-          <v-toolbar-title v-if="editThanhPhan === false && !readonlyForm">THÊM THÀNH PHẦN BÁO CÁO</v-toolbar-title>
+          <v-toolbar-title v-if="readonlyForm && editThanhPhan === null">{{ $t('chiTietBaoCao.thongTinThanhPhanBaoCao')}}</v-toolbar-title>
+          <v-toolbar-title v-if="editThanhPhan === true && !readonlyForm">{{ $t('chiTietBaoCao.capNhatThanhPhanBaoCao')}}</v-toolbar-title>
+          <v-toolbar-title v-if="editThanhPhan === false && !readonlyForm">{{ $t('chiTietBaoCao.themThanhPhanBaoCao')}}</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-toolbar-items>
             <v-btn
@@ -221,14 +221,14 @@
               <v-icon left>
                 mdi-close
               </v-icon>
-              Thoát
+              {{ $t('basic.thoat')}}
             </v-btn>
             <v-btn v-if="!readonlyForm" small depressed class="mr-2" color="primary" :loading="loadingAction" :disabled="loadingAction" @click.native="submitThemThanhPhan">
               <v-icon left dark size="18">
                 mdi-file-document-plus-outline
               </v-icon>
-              <span v-if="editThanhPhan">Cập nhật</span>
-              <span v-else>Thêm thành phần</span>
+              <span v-if="editThanhPhan">{{ $t('chiTietBaoCao.capNhat')}}</span>
+              <span v-else>{{$t('chiTietBaoCao.themThanhPhan')}} </span>
             </v-btn>
           </v-card-actions>
         </v-card-text>

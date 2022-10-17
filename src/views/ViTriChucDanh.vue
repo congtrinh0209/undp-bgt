@@ -8,10 +8,10 @@
       <v-row justify="start" class="mt-0 mx-0" style="border-bottom: 1px solid #2161B1">
         <v-col class="d-flex align-center justify-start px-0" style="color: #2161B1;font-weight: 500;">
           <div class="header-content" v-if="!selectDonVi">
-            DANH SÁCH CHỨC VỤ
+            {{ $t('danhSachChucVu.headercontent') }}
           </div>
           <div class="header-content" v-if="selectDonVi">
-            CHỨC VỤ - {{donViSearch['tenGoi']}}
+            {{ $t('viTriChucDanh.chucVu')}} - {{donViSearch['tenGoi']}}
           </div>
           <div class="triangle-header"></div>
         </v-col>
@@ -23,7 +23,7 @@
               dense
               clearable
               hide-details="auto"
-              placeholder="Nhập tên chức vụ"
+              v-bind:placeholder="$t('danhSachChucVu.nhapTenChucVu')"
           ></v-text-field>
         </v-col>
         <v-col v-if="!selectDonVi" class="d-flex align-center justify-end" style="max-width: 300px;">
@@ -37,7 +37,7 @@
             dense
             solo
             hide-details="auto"
-            placeholder="Chọn đơn vị"
+            v-bind:placeholder="$t('danhSachChucVu.chonDonVi')"
             return-object
             clearable
           >
@@ -46,13 +46,13 @@
         <v-col class="d-flex align-center justify-end" style="max-width: 150px;">
           <v-btn small color="primary" class="btn-form mx-0 text-white" @click="getChucVu('reset')">
             <v-icon size="18">mdi-magnify</v-icon>&nbsp;
-            Tìm kiếm
+            {{ $t('basic.timKiem') }}
           </v-btn>
         </v-col>
         <v-col class="d-flex align-center justify-end px-0" style="max-width: 120px;">
           <v-btn small color="primary" class="btn-form mx-0 text-white" @click="showAddChucVu">
             <v-icon size="18">mdi-plus</v-icon>&nbsp;
-            Thêm mới
+            {{ $t('basic.themMoi') }}
           </v-btn>
         </v-col>
       </v-row>
@@ -93,7 +93,7 @@
                   <v-icon size="22">mdi-pencil</v-icon>
                 </v-btn>
               </template>
-              <span>Sửa</span>
+              <span>{{ $t('basic.sua')}}</span>
             </v-tooltip>
             <!-- <v-tooltip top>
               <template v-slot:activator="{ on, attrs }">
@@ -118,7 +118,7 @@
           dark
           color="primary" class="px-3"
         >
-          <v-toolbar-title v-if="typeAction === 'create'">Thêm chức vụ</v-toolbar-title>
+          <v-toolbar-title v-if="typeAction === 'create'">{{ $t('danhSachChucVu.themChucVu') }}</v-toolbar-title>
           <v-toolbar-title v-else>Cập nhật chức vụ</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-toolbar-items>
@@ -139,7 +139,7 @@
           >
             <v-layout wrap>
               <v-col cols="12" md="6" class="py-0 mb-2">
-                  <label>Chức vụ <span class="red--text">(*)</span></label>
+                  <label>{{ $t('viTriChucDanh.chucVu')}} <span class="red--text">(*)</span></label>
                   <v-text-field
                     class="flex input-form"
                     v-model="thongTinChucVu['tenGoi']"
@@ -152,7 +152,7 @@
                   ></v-text-field>
               </v-col>
               <v-col cols="12" md="6" class="py-0 mb-2">
-                  <label>Thuộc đơn vị <span class="red--text">(*)</span></label>
+                  <label>{{ $t('viTriChucDanh.thuocDonVi')}} <span class="red--text">(*)</span></label>
                   <v-autocomplete
                     class="flex input-form"
                     :items="itemsDonVi"
@@ -194,13 +194,13 @@
             <v-icon left>
               mdi-close
             </v-icon>
-            Thoát
+            {{ $t('basic.thoat') }}
           </v-btn>
           <v-btn small v-if="typeAction === 'create'" class="mr-2" color="primary" :loading="loading" :disabled="loading" @click="submitAddChucVu">
             <v-icon left>
               mdi-content-save
             </v-icon>
-            <span>Thêm mới</span>
+            <span>{{ $t('basic.themMoi') }}</span>
           </v-btn>
           <v-btn small v-else class="mr-2" color="primary" :loading="loading" :disabled="loading" @click="submitUpdateChucVu">
             <v-icon left>
@@ -217,6 +217,7 @@
 <script>
   import Pagination from './Pagination.vue'
   import toastr from 'toastr'
+  import i18n from '@/plugins/i18n'
   toastr.options = {
     'closeButton': true,
     'timeOut': '5000',
@@ -241,31 +242,31 @@
       headers: [
         {
             sortable: false,
-            text: 'STT',
+            text: i18n.t('viTriChucDanh.stt'),
             align: 'center',
             value: 'index'
         },
         {
             sortable: false,
-            text: 'Chức vụ',
+            text: i18n.t('viTriChucDanh.chucVu'),
             align: 'left',
             value: 'tenGoi'
         },
         {
             sortable: false,
-            text: 'Đơn vị',
+            text: i18n.t('viTriChucDanh.donVi'),
             align: 'left',
             value: 'coQuanDonVi'
         },
         {
             sortable: false,
-            text: 'Vai trò sử dụng',
+            text: i18n.t('viTriChucDanh.vaiTroSuDung'),
             align: 'left',
             value: 'vaiTroSuDung'
         },
         {
             sortable: false,
-            text: 'Thao tác',
+            text: i18n.t('viTriChucDanh.thaoTac'),
             align: 'center',
             value: 'action'
         }
