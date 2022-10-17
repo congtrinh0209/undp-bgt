@@ -93,7 +93,21 @@
               <div class="triangle-header"></div>
             </v-col>
             <v-spacer></v-spacer>
-            <v-col v-if="isAdmin || checkRole('CAPNHATBAOCAO')" class="d-flex align-center justify-end py-0 px-0" style="max-width: 150px;">
+            <v-col class="d-flex align-center py-0 px-0" style="max-width: 135px;" v-if="danhSachThanhPhan && danhSachThanhPhan.length">
+              <v-btn :loading="loadingExport" :disabled="loadingExport"
+                depressed
+                class="mx-0"
+                small
+                color="green"
+                @click="exportExcel"
+                style="float: right"
+                >
+                <v-icon size="18" class="white--text">mdi-file-excel-outline</v-icon>
+                &nbsp;
+                <span class="white--text">Xuất excel</span>
+              </v-btn>
+            </v-col>
+            <v-col v-if="isAdmin || checkRole('CAPNHATBAOCAO')" class="d-flex align-center justify-end py-0 px-0" style="max-width: 190px;">
               <v-btn
                 depressed
                 class="mx-0"
@@ -383,6 +397,7 @@ export default {
         selected: [],
         keywordSearch: '',
         loadingData: false,
+        loadingExport: false,
         danhSachThanhPhan: [],
         tableConfig: '',
         maBaoCaoSearch: '',
@@ -815,6 +830,32 @@ export default {
           toastr.success('Thực hiện thành công')
           vm.getdanhSachThanhPhan()
         }
+      },
+      exportExcel () {
+        let vm = this
+        if (vm.loadingExport) {
+          return
+        }
+        vm.loadingExport = true
+        let dataSearch = {
+          "baoCao_maBaoCao": vm.chiTietBaoCao.maBaoCao,
+          "pageable":{
+            "orderFields":"baoCao_maBaoCao",
+            "orderTypes":"asc",
+            "page": 0,
+            "size": 10000
+          }
+        }
+        let filter = {
+          maBaoCao: vm.chiTietBaoCao.maBaoCao,
+          url: '/v1/datasharing/thanhphanbaocao/detail/export',
+          data: dataSearch
+        }
+        vm.$store.dispatch('exportTongHopBaoCao', filter).then(function (response) {
+          vm.loadingExport = false
+        }).catch(function () {
+          vm.loadingExport = false
+        })
       },
       viewHistory () {
         let vm = this

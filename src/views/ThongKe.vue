@@ -99,6 +99,18 @@
           </div>
           <v-row class="mb-0 mt-2">
             <v-col cols="12" class="d-flex align-center justify-end py-0 pb-2 my-0" v-if="advanceSearch">
+              <v-btn :loading="loadingExport" :disabled="loadingExport"
+                depressed
+                class="mx-0 mr-3"
+                small
+                color="green"
+                @click="exportExcel"
+                style="float: right"
+                >
+                <v-icon size="18" class="white--text">mdi-file-excel-outline</v-icon>
+                &nbsp;
+                <span class="white--text">Xuất excel</span>
+              </v-btn>
               <v-btn color="primary" depressed small class="mx-0 text-white" @click="submitThongKe('reset')">
                 <v-icon size="18">mdi-magnify</v-icon>&nbsp;
                 Tổng hợp
@@ -275,6 +287,7 @@ export default {
     props: ['type', 'id'],
     data() {
       return {
+        loadingExport: false,
         dialogChonMauThongKe: false,
         validFormChonMauThongKe: false,
         nhomBaoCao: '',
@@ -499,12 +512,12 @@ export default {
           "mauBaoCao_maMauBaoCao": vm.mauBaoCao.maMauBaoCao,
           "mauThongKe_maMau": vm.mauThongKe.maMau,
           "pageable":{
-              "orderFields":"baoCao_maBaoCao",
-              "orderTypes":"asc",
-              "page": vm.page,
-              "size": vm.itemsPerPage
-            }
-          })
+            "orderFields":"baoCao_maBaoCao",
+            "orderTypes":"asc",
+            "page": vm.page,
+            "size": vm.itemsPerPage
+          }
+        })
         let filter = {
           data: dataSearch
         }
@@ -516,6 +529,49 @@ export default {
           vm.loadingData = false
         }).catch(function () {
           vm.loadingData = false
+        })
+      },
+      exportExcel () {
+        let vm = this
+        if (!vm.mauBaoCao) {
+          toastr.error('Vui lòng chọn báo cáo muốn thống kê')
+          return
+        }
+        if (!vm.mauThongKe) {
+          toastr.error('Vui lòng chọn mẫu thống kê')
+          return
+        }
+        vm.$refs.formThongKe.submitTaoBaoCao()
+        let formData = vm.$store.getters.getFormThongKe
+        let formDataFilter = {}
+        for (let key in formData) {
+          if (formData[key]) {
+            formDataFilter[key] = formData[key]
+          }
+        }
+        if (vm.loadingExport) {
+          return
+        }
+        vm.loadingExport = true
+        let dataSearch = Object.assign(formDataFilter, {
+          "mauBaoCao_maMauBaoCao": vm.mauBaoCao.maMauBaoCao,
+          "mauThongKe_maMau": vm.mauThongKe.maMau,
+          "pageable":{
+            "orderFields":"baoCao_maBaoCao",
+            "orderTypes":"asc",
+            "page": vm.page,
+            "size": vm.itemsPerPage
+          }
+        })
+        let filter = {
+          maBaoCao: vm.mauBaoCao.maMauBaoCao,
+          url: '/v1/datasharing/thanhphanbaocao/general/export',
+          data: dataSearch
+        }
+        vm.$store.dispatch('exportTongHopBaoCao', filter).then(function (response) {
+          vm.loadingExport = false
+        }).catch(function () {
+          vm.loadingExport = false
         })
       },
       exitForm () {

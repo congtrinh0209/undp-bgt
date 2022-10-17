@@ -377,7 +377,7 @@ export default {
               align: 'left',
               value: 'tinhTrang',
               class: 'th-center',
-              width: 90
+              width: 120
           },
           {
               sortable: false,

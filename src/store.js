@@ -635,5 +635,37 @@ export default new Vuex.Store({
         })
       })
     },
+    exportTongHopBaoCao ({ commit, state }, filter) {
+      return new Promise((resolve, reject) => {
+        let dataPost = JSON.stringify(filter.data)
+        let config = {
+          method: 'post',
+          url: filter.url,
+          headers: { 
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + Vue.$cookies.get('Token')
+          },
+          responseType: 'blob',
+          data : dataPost
+        }
+        axios(config).then(function (response) {
+          if (response.data) {
+            var urlFile = window.URL.createObjectURL(response.data)
+            var a = document.createElement('a')
+            document.body.appendChild(a)
+            a.style = 'display: none'
+            a.href = urlFile
+            a.download = 'tonghopbaocao-' + filter.maBaoCao +'.xlsx'
+            a.click()
+            window.URL.revokeObjectURL(urlFile)
+            resolve('success')
+          } else {
+            resolve('pending')
+          }
+        }).catch(function (error) {
+          reject(error)
+        })
+      })
+    },
   }
 })
