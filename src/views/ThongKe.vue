@@ -9,7 +9,7 @@
           <v-row justify="end" class="my-0 mx-0 mt-3" style="border-bottom: 1px solid #2161B1">
             <v-col class="d-flex align-center justify-start py-0 px-0" style="color: #2161B1;font-weight: 500;">
               <div class="header-content">
-                Tổng hợp báo cáo
+                {{ $t('thongKe.headercontent')}}
               </div>
               <div class="triangle-header"></div>
             </v-col>
@@ -26,7 +26,7 @@
                 <v-icon size="18" v-if="!advanceSearch">mdi-filter-variant-plus</v-icon>
                 <v-icon size="18" v-else>mdi-filter-variant</v-icon>
                 &nbsp;
-                Lọc số liệu
+                {{ $t('thongKe.locSoLieu')}}
               </v-btn>
             </v-col>
           </v-row>
@@ -34,7 +34,7 @@
           <div v-if="advanceSearch">
             <v-layout wrap class="pt-3" style="margin: 0 -8px">
               <v-col cols="12" :md="danhSachMauThongKe.length > 1 ? 12 : 12" class="py-0 mb-2">
-                <label>Nhóm báo cáo</label>
+                <label>{{ $t('thongKe.nhomBaoCao')}}</label>
                 <v-autocomplete
                   class="flex input-form"
                   hide-no-data
@@ -52,7 +52,7 @@
                 </v-autocomplete>
               </v-col>
               <v-col cols="12" :md="danhSachMauThongKe.length > 1 ? 12 : 12" class="py-0 mb-2">
-                <label>Báo cáo <span class="red--text">(*)</span></label>
+                <label>{{ $t('thongKe.baoCao')}} <span class="red--text">(*)</span></label>
                 <v-autocomplete
                   class="flex height-auto input-form"
                   hide-no-data
@@ -113,7 +113,7 @@
               </v-btn>
               <v-btn color="primary" depressed small class="mx-0 text-white" @click="submitThongKe('reset')">
                 <v-icon size="18">mdi-magnify</v-icon>&nbsp;
-                Tổng hợp
+                {{ $t('thongKe.tongHop')}}
               </v-btn>
             </v-col>
           </v-row>
@@ -194,7 +194,7 @@
           >
             <v-layout wrap>
               <v-col cols="12" class="py-0 mb-2">
-                <label>Nhóm báo cáo <span class="red--text">(*)</span></label>
+                <label>{{ $t('thongKe.nhomBaoCao')}} <span class="red--text">(*)</span></label>
                 <v-autocomplete
                   class="flex input-form"
                   hide-no-data
@@ -212,7 +212,7 @@
                 </v-autocomplete>
               </v-col>
               <v-col cols="12" class="py-0 mb-2">
-                <label>Báo cáo <span class="red--text">(*)</span></label>
+                <label>{{ $t('thongKe.baoCao')}} <span class="red--text">(*)</span></label>
                 <v-autocomplete
                   class="flex input-form"
                   hide-no-data
@@ -273,6 +273,7 @@ import $ from 'jquery'
 import Pagination from './Pagination.vue'
 import toastr from 'toastr'
 import FormThongKe from './FormThongKe.vue'
+import i18n from '@/plugins/i18n'
 toastr.options = {
   'closeButton': true,
   'timeOut': '5000',
@@ -483,11 +484,11 @@ export default {
       submitThongKe (type) {
         let vm = this
         if (!vm.mauBaoCao) {
-          toastr.error('Vui lòng chọn báo cáo muốn thống kê')
+          toastr.error(i18n.t('thongKe.vuiLongChonBaoCao'))
           return
         }
         if (!vm.mauThongKe) {
-          toastr.error('Vui lòng chọn mẫu thống kê')
+          toastr.error(i18n.t('thongKe.vuiLongChonMau'))
           return
         }
         vm.$refs.formThongKe.submitTaoBaoCao()

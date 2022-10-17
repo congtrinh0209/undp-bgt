@@ -9,7 +9,7 @@
       <v-row justify="end" class="mt-0 mb-0 mx-0" style="border-bottom: 1px solid #2161B1">
         <v-col class="d-flex align-center justify-start py-0 pl-0" style="max-width: 300px;color: #2161B1;font-weight: 500;margin-bottom: -5px;">
           <div class="header-content ">
-            CƠ QUAN, ĐƠN VỊ
+            {{ $t('coQuanDonVi.headercontent')}}
           </div>
           <div class="triangle-header"></div>
         </v-col>
@@ -21,7 +21,7 @@
               dense
               clearable
               hide-details="auto"
-              placeholder="Nhập tên đơn vị, mã đơn vị"
+              v-bind:placeholder="$t('coQuanDonVi.nhapTenDonVi')"
               append-icon="mdi-magnify"
               @click:append="getCoQuanDonVi('reset')"
               @keyup.enter="getCoQuanDonVi('reset')"
@@ -37,7 +37,7 @@
         <v-col class="d-flex align-center justify-end py-0 px-0" style="max-width: 120px;">
           <v-btn small color="primary" class="btn-form mx-0 text-white" @click="showAddToChuc">
             <v-icon size="18">mdi-plus</v-icon>&nbsp;
-            Thêm mới
+            {{ $t('coQuanDonVi.themMoi')}}
           </v-btn>
         </v-col>
       </v-row>
@@ -129,7 +129,7 @@
           dark
           color="primary" class="px-3"
         >
-          <v-toolbar-title v-if="typeAction === 'create'">Thêm cơ quan, đơn vị</v-toolbar-title>
+          <v-toolbar-title v-if="typeAction === 'create'">{{ $t('coQuanDonVi.themCoQuanDonVi')}}</v-toolbar-title>
           <v-toolbar-title v-else>Cập nhật cơ quan, đơn vị</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-toolbar-items>
@@ -302,13 +302,13 @@
             <v-icon left>
               mdi-close
             </v-icon>
-            Thoát
+            {{ $t('coQuanDonVi.thoat')}}
           </v-btn>
           <v-btn small v-if="typeAction === 'create'" class="mr-2" color="primary" :loading="loading" :disabled="loading" @click="submitAddToChuc">
             <v-icon left>
               mdi-content-save
             </v-icon>
-            <span>Thêm mới</span>
+            <span>{{ $t('coQuanDonVi.themMoi')}}</span>
           </v-btn>
           <v-btn small v-else class="mr-2" color="primary" :loading="loading" :disabled="loading" @click="submitUpdateToChuc">
             <v-icon left>
@@ -573,7 +573,7 @@
           vm.$store.dispatch('collectionCreate', filter).then(function (result) {
             vm.loading = false
             toastr.remove()
-            toastr.success('Thêm mới thành công')
+            toastr.success(i18n.t('coQuanDonVi.themMoiThanhCong'))
             let data = result.resp
             vm.$router.push({ path: '/co-quan-don-vi/' + data.primKey })
           }).catch(function (response) {
@@ -583,7 +583,7 @@
             //   toastr.error('Mã danh mục đã tồn tại')
             //   return
             // }
-            toastr.error('Thêm mới thất bại')
+            toastr.error(i18n.t('coQuanDonVi.themMoiThatBai'))
           })
         } else {
           vm.loading = false

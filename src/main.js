@@ -7,6 +7,9 @@ import axios from 'axios'
 import VueCookies from 'vue-cookies'
 import toastr from 'toastr'
 import 'toastr/build/toastr.css'
+import i18n from '@/plugins/i18n';
+import FlagIcon from 'vue-flag-icon';
+
 toastr.options = {
   'closeButton': true,
   'timeOut': '5000',
@@ -18,6 +21,7 @@ import jsondata from './jsondata.json'
 // Vue.use(VueConfirmDialog)
 // Vue.component('vue-confirm-dialog', VueConfirmDialog.default)
 
+Vue.use(FlagIcon);
 Vue.use(VueCookies)
 Vue.config.productionTip = false
 const baseURL = process.env.VUE_APP_PATH_API
@@ -130,5 +134,6 @@ new Vue({
   vuetify,
   router,
   store,
+  i18n,
   render: h => h(App)
 }).$mount('#app')

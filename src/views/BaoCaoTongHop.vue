@@ -27,7 +27,7 @@
                 <v-icon size="18" v-if="!advanceSearch">mdi-filter-variant-plus</v-icon>
                 <v-icon size="18" v-else>mdi-filter-variant</v-icon>
                 &nbsp;
-                Tìm kiếm nâng cao
+                {{ $t('baoCaoTongHop.timKiemNangCao')}}
               </v-btn>
             </v-col>
           </v-row>
@@ -38,7 +38,7 @@
             >
               <v-row align-content="center" class="my-0 mt-2">
                 <v-col cols="12" :md="type == 'tra-cuu' ? 3 : 4" class="py-0 mb-2">
-                  <label>Kỳ báo cáo</label>
+                  <label>{{ $t('formTaoBaoCao.kyBaoCao')}}</label>
                   <v-autocomplete
                     class="flex input-form mt-2"
                     hide-no-data
@@ -55,7 +55,7 @@
                   </v-autocomplete>
                 </v-col>
                 <v-col cols="12" :md="type == 'tra-cuu' ? 3 : 4" class="py-0 mb-2">
-                  <label>Năm báo cáo</label>
+                  <label>{{ $t('formTaoBaoCao.namBaoCao')}}</label>
                   <v-autocomplete
                     class="flex input-form mt-2"
                     hide-no-data
@@ -72,7 +72,7 @@
                   </v-autocomplete>
                 </v-col>
                 <v-col cols="12" :md="type == 'tra-cuu' ? 3 : 4" class="my-0 py-0 mb-2">
-                  <label>Mã báo cáo</label>
+                  <label>{{ $t('baoCaoTongHop.maBaoCao')}}</label>
                   <v-text-field
                       class="input-form mt-2"
                       v-model="maBaoCaoSearch"
@@ -101,7 +101,7 @@
                 </v-col>
 
                 <v-col cols="12"  class="py-0 mb-2">
-                    <label>Loại báo cáo</label>
+                    <label>{{ $t('formTaoBaoCao.loaiBaoCao')}}</label>
                     <v-autocomplete
                       class="flex input-form mt-2"
                       hide-no-data
@@ -128,7 +128,7 @@
                     </v-autocomplete>
                 </v-col>
                 <v-col cols="4" class="py-0 mb-2">
-                    <label>Đơn vị được giao</label>
+                    <label>{{ $t('formTaoBaoCao.donViDuocGiao')}}</label>
                     <v-autocomplete
                       class="flex input-form mt-2"
                       hide-no-data
@@ -145,7 +145,7 @@
                     </v-autocomplete>
                 </v-col>
                 <v-col cols="8" class="py-0 mb-2">
-                  <label>Hạn xử lý</label>
+                  <label>{{ $t('formTaoBaoCao.hanXuLy')}}</label>
                   <div class="layout wrap mb-3 mt-2">
                     <v-layout wrap style="width: calc(100% - 200px);">
                       <v-flex xs6 class="pr-2">
@@ -164,7 +164,7 @@
                               persistent-hint
                               append-icon="mdi-calendar"
                               @blur="fromReceiveDate = parseDate(fromReceiveDateFormatted)"
-                              placeholder="Từ ngày"
+                              v-bind:placeholder="$t('baoCaoTongHop.tuNgay')"
                               hide-details
                               solo
                               dense
@@ -193,7 +193,7 @@
                               persistent-hint
                               append-icon="mdi-calendar"
                               @blur="toReceiveDate = parseDate(toReceiveDateFormatted)"
-                              placeholder="Đến ngày"
+                              v-bind:placeholder="$t('baoCaoTongHop.denNgay')"
                               hide-details
                               solo
                               dense
@@ -215,7 +215,7 @@
             <v-col cols="12" class="d-flex align-center justify-end py-0 pb-2 my-0" v-if="advanceSearch">
               <v-btn color="primary" depressed small class="mx-0 text-white" @click="getDanhSachBaoCao()">
                 <v-icon size="18">mdi-magnify</v-icon>&nbsp;
-                Tìm kiếm
+                {{ $t('baoCaoTongHop.timKiem')}}
               </v-btn>
             </v-col>
           </v-row>
@@ -266,7 +266,7 @@
                           <v-icon size="20">mdi-arrow-right-bold-circle-outline</v-icon>
                         </v-btn>
                       </template>
-                      <span>Chi tiết báo cáo</span>
+                      <span>{{ $t('baoCaoTongHop.chiTietBaoCao')}}</span>
                     </v-tooltip>
 
                     <v-tooltip top v-if="isAdmin || checkRole('THEMMOIBAOCAO')">
@@ -275,7 +275,7 @@
                           <v-icon size="18">mdi-delete</v-icon>
                         </v-btn>
                       </template>
-                      <span>Xóa báo cáo</span>
+                      <span>{{ $t('baoCaoTongHop.xoaBaoCao')}}</span>
                     </v-tooltip>
                   </template>
               </v-data-table>
@@ -291,6 +291,7 @@
 <script>
 import Pagination from './Pagination.vue'
 import toastr from 'toastr'
+import i18n from '@/plugins/i18n'
 toastr.options = {
   'closeButton': true,
   'timeOut': '5000',
@@ -322,13 +323,13 @@ export default {
         headers: [
           {
               sortable: false,
-              text: 'STT',
+              text: this.$t('baoCaoTongHop.stt') ,
               align: 'center',
               value: 'index'
           },
           {
               sortable: false,
-              text: 'Mã báo cáo',
+              text:  this.$t('baoCaoTongHop.maBaoCao') ,
               align: 'left',
               value: 'maBaoCao',
               class: 'th-center',
@@ -336,14 +337,14 @@ export default {
           },
           {
               sortable: false,
-              text: 'Loại báo cáo',
+              text: this.$t('baoCaoTongHop.loaiBaoCao') ,
               align: 'left',
               value: 'tenBaoCao',
               class: 'th-center'
           },
           {
               sortable: false,
-              text: 'Kỳ, năm báo cáo',
+              text: this.$t('baoCaoTongHop.kyBaoCao') ,
               align: 'left',
               value: 'kyBaoCao',
               class: 'th-center',
@@ -351,7 +352,7 @@ export default {
           },
           {
               sortable: false,
-              text: 'Đơn vị được giao',
+              text: this.$t('baoCaoTongHop.donViDuocGiao') ,
               align: 'left',
               value: 'coQuanThucHien',
               class: 'th-center',
@@ -359,21 +360,21 @@ export default {
           },
           {
               sortable: false,
-              text: 'Ngày tạo',
+              text: this.$t('baoCaoTongHop.ngayTao') ,
               align: 'left',
               value: 'thoiGianTao',
               class: 'th-center'
           },
           {
               sortable: false,
-              text: 'Hạn xử lý',
+              text: this.$t('baoCaoTongHop.hanXuLy') ,
               align: 'left',
               value: 'hanXuLy',
               class: 'th-center'
           },
           {
               sortable: false,
-              text: 'Tình trạng',
+              text: this.$t('baoCaoTongHop.tinhTrang') ,
               align: 'left',
               value: 'tinhTrang',
               class: 'th-center',
@@ -381,7 +382,7 @@ export default {
           },
           {
               sortable: false,
-              text: 'Thao tác',
+              text: this.$t('baoCaoTongHop.thaoTac') ,
               align: 'center',
               value: 'action',
               class: 'th-center',
@@ -407,6 +408,8 @@ export default {
         fromReceiveDateFormatted: '',
         toReceiveDate: '',
         toReceiveDateFormatted: '',
+        
+
       }
     },
     created () {
@@ -416,23 +419,23 @@ export default {
         return
       }
       if (vm.type === 'bao-cao-moi') {
-        vm.dynamicType = "Báo cáo tạo mới"
-      }
-      if (vm.type === 'cho-xu-ly') {
-        vm.dynamicType = "Báo cáo chờ xử lý"
-      }
-      if (vm.type === 'xu-ly-lai') {
-        vm.dynamicType = "Báo cáo xử lý lại"
-      }
-      if (vm.type === 'cho-duyet') {
-        vm.dynamicType = "Báo cáo chờ duyệt"
-      }
-      if (vm.type === 'tra-cuu') {
-        vm.dynamicType = "Tra cứu báo cáo"
-      }
-      if (vm.type === 'tong-hop') {
-        vm.dynamicType = "Tổng hợp báo cáo"
-      }
+          vm.dynamicType = "Báo cáo tạo mới"
+        }
+        if (vm.type === 'cho-xu-ly') {
+          vm.dynamicType = i18n.t('drawer.baoCaoChoXuLy')
+        }
+        if (vm.type === 'xu-ly-lai') {
+          vm.dynamicType = i18n.t('drawer.baoCaoXuLyLai')
+        }
+        if (vm.type === 'cho-duyet') {
+          vm.dynamicType = i18n.t('drawer.baoCaoChoDuyet')
+        }
+        if (vm.type === 'tra-cuu') {
+          vm.dynamicType = i18n.t('drawer.traCuu')
+        }
+        if (vm.type === 'tong-hop') {
+          vm.dynamicType = i18n.t('drawer.tongHopBaoCao')
+        }
 
       vm.$store.commit('SET_INDEXTAB', 0)
       vm.danhSachBaoCao = []
@@ -450,39 +453,51 @@ export default {
           arr.push({ tenMuc: "Năm " + (year - i), maMuc: year - i });
         }
         return arr;
-      }
+      },
+      // breadcrumbs: function(){
+      //   return [{
+      //       text: this.$t('drawer.baoCaoChoXuLy')
+      //   }]
+      // },
     },
     watch: {
       '$route': function (newRoute, oldRoute) {
         let vm = this
+        setTimeout(function () {
+        
         if (vm.type === 'bao-cao-moi') {
           vm.dynamicType = "Báo cáo tạo mới"
         }
         if (vm.type === 'cho-xu-ly') {
-          vm.dynamicType = "Báo cáo chờ xử lý"
+          vm.dynamicType = i18n.t('drawer.baoCaoChoXuLy')
         }
         if (vm.type === 'xu-ly-lai') {
-          vm.dynamicType = "Báo cáo xử lý lại"
+          vm.dynamicType = i18n.t('drawer.baoCaoXuLyLai')
         }
         if (vm.type === 'cho-duyet') {
-          vm.dynamicType = "Báo cáo chờ duyệt"
+          vm.dynamicType = i18n.t('drawer.baoCaoChoDuyet')
         }
         if (vm.type === 'tra-cuu') {
-          vm.dynamicType = "Tra cứu báo cáo"
+          vm.dynamicType = i18n.t('drawer.traCuu')
         }
         if (vm.type === 'tong-hop') {
-          vm.dynamicType = "Tổng hợp báo cáo"
+          vm.dynamicType = i18n.t('drawer.tongHopBaoCao')
         }
         vm.$store.commit('SET_INDEXTAB', 2)
+
+        }, 200)
       },
       type (val) {
         let vm = this
         vm.resetFormTimKiem()
         vm.advanceSearch = false
         vm.getDanhSachBaoCao('reset')
-      }
+      },
     },
     methods: {
+      // getMsg: function (key) {
+      //   return this.$t(key)
+      // },
       getDanhSachBaoCao (type) {
         let vm = this
         if (type === 'reset') {

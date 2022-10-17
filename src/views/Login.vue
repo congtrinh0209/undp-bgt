@@ -8,16 +8,20 @@
     >
       <div class="container-wrap">
         <div class="wrap-title">
+          <div class="d-flex justify-end py-0 pb-0 my-0 px-5">
+            <button v-for="entry in languages" :key="entry.title" @click="changeLocale(entry.language)">
+              <flag :iso="entry.flag" v-bind:squared=false />
+              {{entry.title}}
+            </button>
+          </div>
           <v-flex style="text-align: center;">
             <img class="img-login-logo" :src="`${publicPath}/images/image-logo.png?t=93111413`">
+            
           </v-flex>
+          
           <v-flex class="wrap-title pt-1 mb-2">
-            <div class="text-1">HỆ THỐNG GIÁM SÁT VÀ ĐÁNH GIÁ THÍCH ỨNG BIẾN ĐỔI KHÍ HẬU</div>
-            <div class="text-2">BỘ GIAO THÔNG VẬN TẢI</div>
-          </v-flex>
-          <v-flex class="wrap-title pt-1">
-            <div class="text-1">Monitoring and evaluation system for climate change adaptation activities</div>
-            <div class="text-2">Ministry of Transport</div>
+            <div class="text-1">{{ $t('login.welcomeMsg1')}} </div>
+            <div class="text-2">{{ $t('login.welcomeMsg2')}}</div>
           </v-flex>
         </div>
 
@@ -29,29 +33,29 @@
                 font-family: 'Roboto Slab';
                 color: #fff;
                 font-weight: 700;">
-                <div>ĐĂNG NHẬP</div>
+                <div>{{ $t('login.loginMsg') }}</div>
               </v-flex>
               <v-flex xs12>
+                <span style='color: white;'>{{ $t('login.tenDangNhap') }}</span>
                 <v-text-field
                   dense
                   class="input-text"
-                  placeholder="Tên đăng nhập"
                   v-model="userName"
-                  :rules="[v => !!v || 'Tên đăng nhập là bắt buộc']"
+                  :rules="[v => !!v || $t('login.batBuocTenDangNhap')]"
                   required
                   prepend-inner-icon="mdi-account"
                   @keyup.enter="login"
                   hide-details="auto"
-                ></v-text-field>
+                >s</v-text-field>
               </v-flex>
               <v-flex xs12 class="" style="margin-top: 30px">
+                <span style='color: white;'>{{ $t('login.matKhau') }}</span>
                 <v-text-field
                   class="input-text"
                   dense
-                  placeholder="Mật khẩu"
                   v-model="password"
                   :type="'password'"
-                  :rules="[v => !!v || 'Mật khẩu là bắt buộc']"
+                  :rules="[v => !!v || $t('login.batBuocMatKhau')]"
                   required
                   prepend-inner-icon="mdi-key"
                   @keyup.enter="login"
@@ -65,7 +69,7 @@
                   @click="login"
                 >
                   <v-icon size="20">mdi-login</v-icon>&nbsp;
-                  Đăng nhập
+                  {{ $t('login.loginMsg') }}
                 </v-btn>
               </v-flex>
               
@@ -109,10 +113,10 @@
       
     </v-container>
     <div class="wrap-contact-info">
-      <div class="mb-1">Trung tâm công nghệ thông tin - Bộ Giao thông vận tải</div>
+      <div class="mb-1">{{ $t('login.trungTamCongNgheMsg') }}</div>
       <div class="mb-1">
         <v-icon size="18" color="#fff">mdi-map-marker-outline</v-icon>&nbsp;
-        <span>Trụ sở: Số 80 Trần Hưng Đạo, Hoàn Kiếm, Hà Nội</span>
+        <span>{{ $t('login.headOffice') }}</span>
       </div>
       <div class="mb-1">
         <v-icon size="18" color="#fff">mdi-phone-in-talk-outline</v-icon>&nbsp;
@@ -139,6 +143,8 @@
   import Vue from 'vue'
   import axios from 'axios'
   import toastr from 'toastr'
+  import i18n from '@/plugins/i18n'
+
   toastr.options = {
     'closeButton': true,
     'timeOut': '5000',
@@ -157,7 +163,12 @@
       password: '',
       client_secret: '',
       code: '',
-      signed: false
+      signed: false,
+      languages: [
+        { flag: 'vn', language: 'vi', title: 'Tiếng Việt' },
+        { flag: 'us', language: 'en', title: 'English' },
+      ],
+      
     }),
     created () {
       let vm = this
@@ -181,6 +192,9 @@
     computed: {
     },
     methods: {
+      changeLocale(locale) {
+        i18n.locale = locale;
+      },
       login () {
         let vm = this
         if (vm.loading || !vm.userName || !vm.password) {
@@ -294,12 +308,12 @@
             }
           } else {
             toastr.remove()
-            toastr.error('Tên đăng nhập hoặc mật khẩu không chính xác')
+            // toastr.error(this.$t('login.saiTenDangNhapVaMatKhau'))
           }
         }).catch(function (result) {
           vm.loading = false
           toastr.remove()
-          toastr.error('Tên đăng nhập hoặc mật khẩu không chính xác')
+          toastr.error(i18n.t('login.saiTenDangNhapVaMatKhau'))
         })
       },
       loginKeyCloak () {
@@ -659,5 +673,19 @@
     .wrap-contact-info {
       left: 50px;
     }
+  }
+  button {
+    padding: 5px;
+    font-size: 16px;
+    color: white;
+    margin: 5px;
+  }
+  .label {
+    color: while;
+  }
+  .lang-btn {
+    margin-top: 5px;
+    margin-left: 91%;
+    position: absolute;
   }
 </style>

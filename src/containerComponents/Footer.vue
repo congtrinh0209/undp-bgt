@@ -7,11 +7,11 @@
           <v-layout wrap>
             <v-flex class="text-1">
               <v-icon size="18" color="#2161B1">mdi-copyright</v-icon>&nbsp;
-              <span>TRUNG TÂM CÔNG NGHỆ THÔNG TIN - BỘ GIAO THÔNG VẬN TẢI</span>
+              <span>{{ $t('login.trungTamCongNgheMsg')}}</span>
             </v-flex>
             <v-flex class="text-2">
               <v-icon size="18" color="#2161B1">mdi-phone-in-talk-outline</v-icon>&nbsp;
-              <span>Hotline: 1900 0318 - Điện thoại: (024) 3.822.2979 </span>
+              <span>{{ $t('basic.hotline')}}</span>
             </v-flex>
             <v-flex class="text-3">
               <v-icon size="18" color="#2161B1">mdi-email-outline</v-icon>&nbsp;

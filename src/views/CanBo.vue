@@ -8,7 +8,7 @@
       <v-row justify="end" class="mt-0 mb-0 mx-0" style="border-bottom: 1px solid #2161B1">
         <v-col class="d-flex align-center justify-start py-0 px-0" style="color: #2161B1;font-weight: 500;margin-bottom: -1px;">
           <div class="header-content" v-if="!selectDonVi">
-            DANH SÁCH CÁN BỘ
+            {{ $t('danhSachCanBo.headercontent')}}
           </div>
           <div class="header-content" v-if="selectDonVi">
             CÁN BỘ - {{donViSearch['tenGoi']}}
@@ -21,7 +21,7 @@
         <v-col class="d-flex align-center justify-end py-0 px-0" style="max-width: 150px;">
           <v-btn small color="primary" class="btn-form mx-0 text-white" @click="showAddCanBo">
             <v-icon size="18">mdi-plus</v-icon>&nbsp;
-            Thêm mới
+            {{ $t('themMoi')}}
           </v-btn>
         </v-col>
       </v-row>
@@ -35,7 +35,7 @@
               dense
               clearable
               hide-details="auto"
-              placeholder="Nhập tên, mã cán bộ"
+              v-bind:placeholder="$t('danhSachCanBo.nhapTenMaCanBo')"
           ></v-text-field>
         </v-col>
         <v-col v-if="!selectDonVi" class="d-flex align-center justify-start" style="">
@@ -51,7 +51,7 @@
             hide-details="auto"
             clearable
             return-object
-            placeholder="Đơn vị công tác"
+            v-bind:placeholder="$t('danhSachCanBo.donViCongTac')"
           >
           </v-autocomplete>
         </v-col>
@@ -84,7 +84,7 @@
             solo
             hide-details="auto"
             clearable
-            placeholder="Chức vụ"
+            v-bind:placeholder="$t('danhSachCanBo.chucVu')"
             return-object
           >
           </v-autocomplete>
@@ -109,7 +109,7 @@
         <v-col class="d-flex align-center justify-end" style="max-width: 150px;">
           <v-btn small color="primary" class="btn-form mx-0 text-white" @click="getDanhSachCanBo('reset')">
             <v-icon size="18">mdi-magnify</v-icon>&nbsp;
-            Tìm kiếm
+            {{ $t('basic.timKiem') }}
           </v-btn>
         </v-col>
       </v-row>
@@ -189,7 +189,7 @@
           dark
           color="primary" class="px-3"
         >
-          <v-toolbar-title v-if="typeAction === 'create'">Thêm mới cán bộ</v-toolbar-title>
+          <v-toolbar-title v-if="typeAction === 'create'">{{ $t('danhSachCanBo.themMoiCanBo') }}</v-toolbar-title>
           <v-toolbar-title v-else>Cập nhật thông tin cán bộ</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-toolbar-items>
@@ -387,7 +387,7 @@
                 </v-autocomplete>
               </v-col> -->
               <v-col cols="12" md="6" class="py-0 mb-2">
-                <label>Chức vụ</label>
+                <label>{{ $t('danhSachCanBo.chucVu')}}</label>
                 <v-autocomplete
                   class="flex input-form"
                   hide-no-data
@@ -427,13 +427,13 @@
             <v-icon left>
               mdi-close
             </v-icon>
-            Thoát
+            {{ $t('basic.thoat') }}
           </v-btn>
           <v-btn small v-if="typeAction === 'create'" class="mr-0" color="primary" :loading="loading" :disabled="loading" @click="submitAddCanBo">
             <v-icon left>
               mdi-content-save
             </v-icon>
-            <span>Thêm mới</span>
+            <span>{{ $t('themMoi')}}</span>
           </v-btn>
           <v-btn small v-else class="mr-0" color="primary" :loading="loading" :disabled="loading" @click="submitUpdateCanBo">
             <v-icon left>
@@ -450,6 +450,7 @@
 <script>
   import Pagination from './Pagination.vue'
   import toastr from 'toastr'
+  import i18n from '@/plugins/i18n'
   toastr.options = {
     'closeButton': true,
     'timeOut': '5000',
@@ -481,19 +482,19 @@
       headers: [
         {
             sortable: false,
-            text: 'STT',
+            text: i18n.t('danhSachCanBo.stt'),
             align: 'center',
             value: 'index'
         },
         {
             sortable: false,
-            text: 'Mã cán bộ',
+            text: i18n.t('danhSachCanBo.maCanBo'),
             align: 'left',
             value: 'maSoCanBo'
         },
         {
             sortable: false,
-            text: 'Họ tên',
+            text: i18n.t('danhSachCanBo.hoVaTen'),
             align: 'left',
             value: 'hoVaTen'
         },
@@ -505,31 +506,31 @@
         // },
         {
             sortable: false,
-            text: 'Đơn vị công tác',
+            text: i18n.t('danhSachCanBo.donViCongTac'),
             align: 'left',
             value: 'coQuanDonVi'
         },
         {
             sortable: false,
-            text: 'Chức vụ',
+            text: i18n.t('danhSachCanBo.chucVu'),
             align: 'left',
             value: 'viTriChucDanh'
         },
         {
             sortable: false,
-            text: 'Số điện thoại/ email',
+            text: i18n.t('danhSachCanBo.sdt'),
             align: 'left',
             value: 'danhBaLienLac'
         },
         {
             sortable: false,
-            text: 'Tình trạng công tác',
+            text: i18n.t('danhSachCanBo.tinhTrangCongTac'),
             align: 'left',
             value: 'tinhTrangCongTac'
         },
         {
             sortable: false,
-            text: 'Thao tác',
+            text: i18n.t('danhSachCanBo.thaoTac'),
             align: 'center',
             value: 'action'
         },
