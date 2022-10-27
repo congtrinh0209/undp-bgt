@@ -14,7 +14,7 @@
               <div class="triangle-header"></div>
             </v-col>
             <v-spacer></v-spacer>
-            <v-col class="d-flex align-center justify-end py-0 px-0" style="max-width: 150px;margin-bottom: -3px;">
+            <v-col class="d-flex align-center justify-end py-0 px-0" style="max-width: 150px;margin-bottom: -3px;height: 30px;">
               <v-btn
                 depressed
                 class="mx-0"
@@ -93,7 +93,7 @@
               <div class="triangle-header"></div>
             </v-col>
             <v-spacer></v-spacer>
-            <v-col class="d-flex align-center py-0 px-0" style="max-width: 135px;" v-if="danhSachThanhPhan && danhSachThanhPhan.length">
+            <v-col class="d-flex align-center py-0 px-0" style="max-width: 135px;height: 30px;" v-if="danhSachThanhPhan && danhSachThanhPhan.length">
               <v-btn :loading="loadingExport" :disabled="loadingExport"
                 depressed
                 class="mx-0"
@@ -104,10 +104,10 @@
                 >
                 <v-icon size="18" class="white--text">mdi-file-excel-outline</v-icon>
                 &nbsp;
-                <span class="white--text">Xuất excel</span>
+                <span class="white--text">{{ $t('chiTietBaoCao.xuatExcel')}}</span>
               </v-btn>
             </v-col>
-            <v-col v-if="isAdmin || checkRole('CAPNHATBAOCAO')" class="d-flex align-center justify-end py-0 px-0" style="max-width: 190px;">
+            <v-col v-if="isAdmin || checkRole('CAPNHATBAOCAO')" class="d-flex align-center justify-end py-0 px-0" style="max-width: 190px;height: 30px;">
               <v-btn
                 depressed
                 class="mx-0"
@@ -161,7 +161,7 @@
                         <div v-else-if="itemHeader.type == 'calculator'" :style="itemHeader.hasOwnProperty('style') ? itemHeader.style : ''">
                           {{ convertDataView(itemHeader, item['noiDung']) }}
                         </div>
-                        <div v-else-if="itemHeader.type == 'action'">
+                        <div v-else-if="itemHeader.type == 'action'" style="width: 200px">
                           <v-tooltip top >
                             <template v-slot:activator="{ on, attrs }">
                               <v-btn @click.stop="showThongTinThanhPhan(item)" color="#2161b1" text icon class=" mr-2" v-bind="attrs" v-on="on">

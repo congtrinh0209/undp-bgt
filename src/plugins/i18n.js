@@ -136,6 +136,7 @@ const messages = {
             themThanhPhan: 'Thêm thành phần',
             chiTietThanhPhan: 'Chi tiết thành phần',
             capNhat: 'Cập nhật',
+            xuatExcel: 'Xuất excel'
         },
         formThemThanhPhan: {
             taiLenTaiLieuDinhKem: 'Tải lên tài liệu đính kèm',
@@ -224,7 +225,7 @@ const messages = {
             tinhTrang: 'Status',
             thaoTac: 'Action', 
             chiTietBaoCao: 'Report Details', 
-            xoaBaoCao: 'Delete report',
+            xoaBaoCao: 'Delete report'
         },
         pagination: {
             page: 'Page',
@@ -282,6 +283,7 @@ const messages = {
             themThanhPhan: 'Add component',
             chiTietThanhPhan: 'Component details',
             capNhat: 'Update',
+            xuatExcel: 'Export excel'
         },
         formThemThanhPhan: {
             taiLenTaiLieuDinhKem: 'Upload attachments',

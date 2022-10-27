@@ -21,7 +21,8 @@ export default new Vuex.Store({
       callback: () => {}
     },
     formData: '',
-    formThongKe: ''
+    formThongKe: '',
+    activeChangeLang: false
   },
   getters: {
     getIndexTab: (state) => state.indexTab,
@@ -43,6 +44,9 @@ export default new Vuex.Store({
     },
     getFormThongKe: (state) => {
       return state.formThongKe
+    },
+    activeChangeLang: (state) => {
+      return state.activeChangeLang
     },
   },
   mutations: {
@@ -70,6 +74,9 @@ export default new Vuex.Store({
     SET_FORM_THONGKE (state, payload) {
       state.formThongKe = payload
     },
+    SET_ACTIVECHANGELANG (state, payload) {
+      state.activeChangeLang = payload
+    }
   },
   actions: {
     getThongKeHoSo ({commit, state}, filter) {
