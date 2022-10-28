@@ -18,6 +18,9 @@ const messages = {
             hotline: 'Hotline: 1900 0318 - Điện thoại: (024) 3.822.2979 ',
             xoa: 'Xóa',
             sua: 'Sửa',
+            huy: 'Hủy',
+            xacnhan: 'Xác nhận',
+            stt: 'STT',
         },
         login: {
             welcomeMsg1: 'HỆ THỐNG GIÁM SÁT VÀ ĐÁNH GIÁ THÍCH ỨNG BIẾN ĐỔI KHÍ HẬU',
@@ -136,7 +139,15 @@ const messages = {
             themThanhPhan: 'Thêm thành phần',
             chiTietThanhPhan: 'Chi tiết thành phần',
             capNhat: 'Cập nhật',
-            xuatExcel: 'Xuất excel'
+            xuatExcel: 'Xuất excel',
+            ghiChu: 'Ghi chú',
+            ghiChuThucHien: 'Ghi chú thực hiện',
+            noiDungGhiChu: 'Nội dung ghi chú...',
+            thaoTac: 'Thao tác',
+            nguoiThucHien: 'Người thực hiện',
+            thoiGianThucHien: 'Thời gian thực hiện',
+            ghiChuThucHienNote: 'Ghi chú thực hiện',
+            lichSuThucHien: 'Lịch sử thực hiện',
         },
         formThemThanhPhan: {
             taiLenTaiLieuDinhKem: 'Tải lên tài liệu đính kèm',
@@ -166,6 +177,9 @@ const messages = {
             hotline: 'Hotline: 1900 0318 - Phone: (024) 3.822.2979 ',
             xoa: 'Delete',
             sua: 'Edit',
+            huy: 'Cancel',
+            xacnhan: 'Accept',
+            stt: 'S/N',
         },
         login: {
             welcomeMsg1: 'Monitoring and evaluation system for climate change adaptation activities',
@@ -283,7 +297,15 @@ const messages = {
             themThanhPhan: 'Add component',
             chiTietThanhPhan: 'Component details',
             capNhat: 'Update',
-            xuatExcel: 'Export excel'
+            xuatExcel: 'Export excel',
+            ghiChu: 'Note',
+            ghiChuThucHien: 'Write a Note',
+            noiDungGhiChu: 'Note content...',
+            thaoTac: 'Action',
+            nguoiThucHien: 'Performer',
+            thoiGianThucHien: 'Execution time',
+            ghiChuThucHienNote: 'Note',
+            lichSuThucHien: 'Execution history',
         },
         formThemThanhPhan: {
             taiLenTaiLieuDinhKem: 'Upload attachments',

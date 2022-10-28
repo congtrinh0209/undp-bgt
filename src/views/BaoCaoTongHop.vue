@@ -466,7 +466,7 @@ export default {
     watch: {
       '$route': function (newRoute, oldRoute) {
         let vm = this
-        console.log('activeChangeLang', vm.activeChangeLang)
+        // console.log('activeChangeLang', vm.activeChangeLang)
         setTimeout(function () {
           if (vm.type === 'bao-cao-moi') {
             vm.dynamicType = "Báo cáo tạo mới"
