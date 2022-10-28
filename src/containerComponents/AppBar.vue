@@ -81,13 +81,18 @@ import i18n from '@/plugins/i18n'
     computed: {
       indexTab () {
         return this.$store.getters.getIndexTab
-      }
+      },
+      activeChangeLang () {
+        return this.$store.getters.activeChangeLang
+      },
     },
     watch: {
     },
     methods: {
       changeLocale(locale) {
-        i18n.locale = locale;
+        let vm = this
+        i18n.locale = locale
+        vm.$store.commit('SET_ACTIVECHANGELANG', !vm.activeChangeLang)
       },
       changeDrawer () {
         let vm = this
@@ -242,6 +247,16 @@ import i18n from '@/plugins/i18n'
   .btn-visible-drawer {
     display: none;
   }
+  .lang-btn {
+    margin-top: 5px;
+    right: 15px;
+    position: absolute;
+  }
+  .lang-btn span.fi {
+    width: 25px;
+    height: 35px;
+    margin-left: 15px;
+  }
   @media screen and (max-width: 426px){
     .title-banner-en {
       display: none;
@@ -286,17 +301,6 @@ import i18n from '@/plugins/i18n'
     .title-banner-en {
       font-size: 12px;
     }
-  }
-  button {
-    padding: 3px;
-    font-size: 20px;
-    color: white;
-    margin: 3px;
-  }
-  .lang-btn {
-    margin-top: 5px;
-    margin-left: 90%;
-    position: absolute;
   }
 </style>
 

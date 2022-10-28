@@ -46,9 +46,9 @@
                   prepend-inner-icon="mdi-account"
                   @keyup.enter="login"
                   hide-details="auto"
-                >s</v-text-field>
+                ></v-text-field>
               </v-flex>
-              <v-flex xs12 class="" style="margin-top: 30px">
+              <v-flex xs12 class="" style="margin-top: 15px">
                 <span style='color: white;'>{{ $t('login.matKhau') }}</span>
                 <v-text-field
                   class="input-text"
@@ -89,7 +89,16 @@
         <div class="wrap-form px-3 py-3" v-if="signed">
           <div class="text-login">TÀI KHOẢN ĐÃ ĐĂNG NHẬP HỆ THỐNG</div>
           <v-flex xs12  style="margin: 20px 0;text-align: center;">
-            <v-btn class="my-0 white--text mr-3 btn-login" style="padding: 0 15px !important;"
+            <v-btn small class="my-0 white--text mr-3 btn-login" style="padding: 0 15px !important;"
+              :loading="loading"
+              :disabled="loading"
+              @click="goToPage"
+            >
+                <v-icon size="20">mdi-home-circle-outline</v-icon>&nbsp;
+                <span>Truy cập hệ thống</span>
+            </v-btn>
+
+            <v-btn class="my-0 white--text mr-3 mt-3 btn-login" small style="padding: 0 15px !important;"
               :loading="loading"
               :disabled="loading"
               @click="submitLogout"
@@ -98,14 +107,6 @@
                 <v-icon size="18">mdi-logout-variant</v-icon>&nbsp;
                 <span>Đăng xuất</span>
               </div>
-            </v-btn>
-            <v-btn class="my-0 white--text mr-3 btn-login" style="padding: 0 15px !important;"
-              :loading="loading"
-              :disabled="loading"
-              @click="goToPage"
-            >
-                <v-icon size="20">mdi-home-circle-outline</v-icon>&nbsp;
-                <span>Truy cập hệ thống</span>
             </v-btn>
           </v-flex>
         </div>
@@ -674,16 +675,16 @@
       left: 50px;
     }
   }
-  button {
+  #login-page button {
     padding: 5px;
     font-size: 16px;
     color: white;
     margin: 5px;
   }
-  .label {
-    color: while;
+  #login-page .label {
+    color: white;
   }
-  .lang-btn {
+  #login-page .lang-btn {
     margin-top: 5px;
     margin-left: 91%;
     position: absolute;

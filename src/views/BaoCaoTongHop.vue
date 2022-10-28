@@ -212,7 +212,7 @@
             </v-form>
           </div>
           <v-row class="my-0">
-            <v-col cols="12" class="d-flex align-center justify-end py-0 pb-2 my-0" v-if="advanceSearch">
+            <v-col cols="12" class="d-flex align-center justify-end py-0 pb-2 my-0" v-if="advanceSearch" style="height: 30px;">
               <v-btn color="primary" depressed small class="mx-0 text-white" @click="getDanhSachBaoCao()">
                 <v-icon size="18">mdi-magnify</v-icon>&nbsp;
                 {{ $t('baoCaoTongHop.timKiem')}}
@@ -259,7 +259,7 @@
                   <template v-slot:item.tinhTrang="{ item }">
                     <div @click.stop="xemChiTietBaoCao(item)">{{ item.tinhTrang.tenMuc }}</div>
                   </template>
-                  <template v-slot:item.action="{ item }">                   
+                  <template v-slot:item.action="{ item }">
                     <v-tooltip top>
                       <template v-slot:activator="{ on, attrs }">
                         <v-btn @click.stop="xemChiTietBaoCao(item)" color="primary" text icon class="" v-bind="attrs" v-on="on">
@@ -378,7 +378,7 @@ export default {
               align: 'left',
               value: 'tinhTrang',
               class: 'th-center',
-              width: 90
+              width: 120
           },
           {
               sortable: false,
@@ -386,7 +386,7 @@ export default {
               align: 'center',
               value: 'action',
               class: 'th-center',
-              width: 100
+              width: 120
           },
         ],
         page: 0,
@@ -454,6 +454,9 @@ export default {
         }
         return arr;
       },
+      activeChangeLang () {
+        return this.$store.getters.activeChangeLang
+      },
       // breadcrumbs: function(){
       //   return [{
       //       text: this.$t('drawer.baoCaoChoXuLy')
@@ -463,28 +466,123 @@ export default {
     watch: {
       '$route': function (newRoute, oldRoute) {
         let vm = this
+        console.log('activeChangeLang', vm.activeChangeLang)
         setTimeout(function () {
-        
-        if (vm.type === 'bao-cao-moi') {
-          vm.dynamicType = "Báo cáo tạo mới"
-        }
-        if (vm.type === 'cho-xu-ly') {
-          vm.dynamicType = i18n.t('drawer.baoCaoChoXuLy')
-        }
-        if (vm.type === 'xu-ly-lai') {
-          vm.dynamicType = i18n.t('drawer.baoCaoXuLyLai')
-        }
-        if (vm.type === 'cho-duyet') {
-          vm.dynamicType = i18n.t('drawer.baoCaoChoDuyet')
-        }
-        if (vm.type === 'tra-cuu') {
-          vm.dynamicType = i18n.t('drawer.traCuu')
-        }
-        if (vm.type === 'tong-hop') {
-          vm.dynamicType = i18n.t('drawer.tongHopBaoCao')
-        }
-        vm.$store.commit('SET_INDEXTAB', 2)
-
+          if (vm.type === 'bao-cao-moi') {
+            vm.dynamicType = "Báo cáo tạo mới"
+          }
+          if (vm.type === 'cho-xu-ly') {
+            vm.dynamicType = i18n.t('drawer.baoCaoChoXuLy')
+          }
+          if (vm.type === 'xu-ly-lai') {
+            vm.dynamicType = i18n.t('drawer.baoCaoXuLyLai')
+          }
+          if (vm.type === 'cho-duyet') {
+            vm.dynamicType = i18n.t('drawer.baoCaoChoDuyet')
+          }
+          if (vm.type === 'tra-cuu') {
+            vm.dynamicType = i18n.t('drawer.traCuu')
+          }
+          if (vm.type === 'tong-hop') {
+            vm.dynamicType = i18n.t('drawer.tongHopBaoCao')
+          }
+          vm.$store.commit('SET_INDEXTAB', 2)
+        }, 200)
+      },
+      activeChangeLang (val) {
+        let vm = this
+        setTimeout(function () {
+          if (vm.type === 'bao-cao-moi') {
+            vm.dynamicType = "Báo cáo tạo mới"
+          }
+          if (vm.type === 'cho-xu-ly') {
+            vm.dynamicType = i18n.t('drawer.baoCaoChoXuLy')
+          }
+          if (vm.type === 'xu-ly-lai') {
+            vm.dynamicType = i18n.t('drawer.baoCaoXuLyLai')
+          }
+          if (vm.type === 'cho-duyet') {
+            vm.dynamicType = i18n.t('drawer.baoCaoChoDuyet')
+          }
+          if (vm.type === 'tra-cuu') {
+            vm.dynamicType = i18n.t('drawer.traCuu')
+          }
+          if (vm.type === 'tong-hop') {
+            vm.dynamicType = i18n.t('drawer.tongHopBaoCao')
+          }
+          // 
+          vm.headers = [].concat(
+            [
+              {
+                  sortable: false,
+                  text: vm.$t('baoCaoTongHop.stt') ,
+                  align: 'center',
+                  value: 'index'
+              },
+              {
+                  sortable: false,
+                  text:  vm.$t('baoCaoTongHop.maBaoCao') ,
+                  align: 'left',
+                  value: 'maBaoCao',
+                  class: 'th-center',
+                  width: 120
+              },
+              {
+                  sortable: false,
+                  text: vm.$t('baoCaoTongHop.loaiBaoCao') ,
+                  align: 'left',
+                  value: 'tenBaoCao',
+                  class: 'th-center'
+              },
+              {
+                  sortable: false,
+                  text: vm.$t('baoCaoTongHop.kyBaoCao') ,
+                  align: 'left',
+                  value: 'kyBaoCao',
+                  class: 'th-center',
+                  width: 130
+              },
+              {
+                  sortable: false,
+                  text: vm.$t('baoCaoTongHop.donViDuocGiao') ,
+                  align: 'left',
+                  value: 'coQuanThucHien',
+                  class: 'th-center',
+                  width: 150
+              },
+              {
+                  sortable: false,
+                  text: vm.$t('baoCaoTongHop.ngayTao') ,
+                  align: 'left',
+                  value: 'thoiGianTao',
+                  class: 'th-center'
+              },
+              {
+                  sortable: false,
+                  text: vm.$t('baoCaoTongHop.hanXuLy') ,
+                  align: 'left',
+                  value: 'hanXuLy',
+                  class: 'th-center'
+              },
+              {
+                  sortable: false,
+                  text: vm.$t('baoCaoTongHop.tinhTrang') ,
+                  align: 'left',
+                  value: 'tinhTrang',
+                  class: 'th-center',
+                  width: 120
+              },
+              {
+                  sortable: false,
+                  text: vm.$t('baoCaoTongHop.thaoTac') ,
+                  align: 'center',
+                  value: 'action',
+                  class: 'th-center',
+                  width: 120
+              },
+            ]
+          ) 
+          console.log('header', vm.headers)
         }, 200)
       },
       type (val) {
@@ -495,9 +593,6 @@ export default {
       },
     },
     methods: {
-      // getMsg: function (key) {
-      //   return this.$t(key)
-      // },
       getDanhSachBaoCao (type) {
         let vm = this
         if (type === 'reset') {
