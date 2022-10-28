@@ -66,7 +66,7 @@
                   <a class="ml-2 font-weight-bold" style="font-size: 14px;text-decoration: underline;color: green">{{ $t('chiTietBaoCao.xemLichSuThucHien')}}</a>
                 </div>
               </v-col>
-              <!--  -->
+              <!--trình duyệt báo cáo  -->
               <v-col class="mb-2" cols="12" v-if="actionItems && actionItems.length">
                 <v-btn
                   v-for="(item, index) in actionItems" :key="index"
@@ -76,7 +76,7 @@
                   @click.stop="showDoAction(item)"
                 >
                   <v-icon size="18">mdi-arrow-right-drop-circle-outline</v-icon>&nbsp;
-                  <span>{{item.tenHanhDong}}</span>
+                  <span >{{($store.getters.activeChangeLang) ? item.tenHanhDong_lang : item.tenHanhDong}}</span>
                 </v-btn>
               </v-col>
               <!--  -->
@@ -199,6 +199,7 @@
             </v-col>
           </v-row>
         </div>
+        
       </v-flex>
     </v-layout>
     <!--  -->
@@ -259,7 +260,7 @@
           dark
           color="primary" class="px-3"
         >
-          <v-toolbar-title >Ghi chú thực hiện</v-toolbar-title>
+          <v-toolbar-title >{{ $t('chiTietBaoCao.ghiChuThucHien')}}</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-toolbar-items>
             <v-btn
@@ -280,7 +281,7 @@
           >
             <v-layout wrap>
               <v-col cols="12" class="py-0 mb-2">
-                <label>Ghi chú</label>
+                <label>{{ $t('chiTietBaoCao.ghiChu')}}</label>
                 <v-textarea
                   class="input-form"
                   v-model="ghiChuDoAction"
@@ -289,7 +290,7 @@
                   clearable
                   max
                   hide-details="auto"
-                  placeholder="Nội dung ghi chú..."
+                  v-bind:placeholder="$t('chiTietBaoCao.noiDungGhiChu')"
                   rows="5"
                 ></v-textarea>
               </v-col>
@@ -301,13 +302,13 @@
             <v-icon left>
               mdi-close
             </v-icon>
-            Hủy
+            {{$t('basic.huy')}}
           </v-btn>
           <v-btn small class="mr-0" color="primary" :loading="loadingAction" :disabled="loadingAction" @click="doAction(actionSelected)">
             <v-icon left>
               mdi-content-save
             </v-icon>
-            <span>Xác nhận</span>
+            <span>{{$t('basic.xacnhan')}}</span>
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -323,7 +324,7 @@
           dark
           color="primary" class="px-3"
         >
-          <v-toolbar-title >Lịch sử thực hiện</v-toolbar-title>
+          <v-toolbar-title >{{$t('chiTietBaoCao.lichSuThucHien')}}</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-toolbar-items>
             <v-btn
@@ -360,7 +361,7 @@
             <v-icon left>
               mdi-close
             </v-icon>
-            Thoát
+            {{ $t('basic.thoat')}}
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -374,6 +375,8 @@ import $ from 'jquery'
 import Pagination from './Pagination.vue'
 import FormThemThanhPhan from './FormThemThanhPhan.vue'
 import toastr from 'toastr'
+import i18n from '@/plugins/i18n'
+
 toastr.options = {
   'closeButton': true,
   'timeOut': '5000',
@@ -433,13 +436,13 @@ export default {
         headersTienTrinh: [
           {
               sortable: false,
-              text: 'STT',
+              text: this.$t('basic.stt'),
               align: 'center',
               value: 'index'
           },
           {
               sortable: false,
-              text: 'Thao tác',
+              text: this.$t('chiTietBaoCao.thaoTac'),
               align: 'left',
               value: 'hanhDong',
               class: 'th-center',
@@ -447,7 +450,7 @@ export default {
           },
           {
               sortable: false,
-              text: 'Người thực hiện',
+              text: this.$t('chiTietBaoCao.nguoiThucHien'),
               align: 'left',
               value: 'hoVaTen',
               class: 'th-center',
@@ -455,7 +458,7 @@ export default {
           },
           {
               sortable: false,
-              text: 'Thời gian thực hiện',
+              text: this.$t('chiTietBaoCao.thoiGianThucHien'),
               align: 'left',
               value: 'thoiGianCapNhat',
               class: 'th-center',
@@ -463,7 +466,7 @@ export default {
           },
           {
               sortable: false,
-              text: 'Ghi chú thực hiện',
+              text: this.$t('chiTietBaoCao.ghiChuThucHien'),
               align: 'left',
               value: 'noiDung',
               class: 'th-center'
@@ -479,12 +482,65 @@ export default {
         return
       }
       vm.getChiTietBaoCao()
+      // vm.sttText = i18n.t('basic.stt')
+      // console.log(this.$store.getters.activeChangeLang)
+    },
+    computed: {
+      activeChangeLang () {
+        let vm = this
+        return vm.$store.getters.activeChangeLang
+      }
     },
     watch: {
       '$route': function (newRoute, oldRoute) {
         let vm = this
         vm.getChiTietBaoCao()
-      }
+      },
+      activeChangeLang (val) {
+        let vm = this
+        vm.headersTienTrinh = [].concat( 
+          [
+          {
+              sortable: false,
+              text: vm.$t('basic.stt'),
+              align: 'center',
+              value: 'index'
+          },
+          {
+              sortable: false,
+              text: vm.$t('chiTietBaoCao.thaoTac'),
+              align: 'left',
+              value: 'hanhDong',
+              class: 'th-center',
+              width: 200
+          },
+          {
+              sortable: false,
+              text: vm.$t('chiTietBaoCao.nguoiThucHien'),
+              align: 'left',
+              value: 'hoVaTen',
+              class: 'th-center',
+              width: 200
+          },
+          {
+              sortable: false,
+              text: vm.$t('chiTietBaoCao.thoiGianThucHien'),
+              align: 'left',
+              value: 'thoiGianCapNhat',
+              class: 'th-center',
+              width: 150
+          },
+          {
+              sortable: false,
+              text: vm.$t('chiTietBaoCao.ghiChuThucHienNote'),
+              align: 'left',
+              value: 'noiDung',
+              class: 'th-center'
+          },
+          ]
+        )
+      },
+
     },
     methods: {
       getChiTietBaoCao () {

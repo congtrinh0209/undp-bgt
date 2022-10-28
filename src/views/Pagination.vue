@@ -80,41 +80,95 @@ import i18n from '@/plugins/i18n'
       let vm = this
       vm.currentPage = vm.pageInput
       vm.currentPagePagination = vm.currentPage + 1
-      for (let i = 1; i <= vm.pageCount; i++) {
-        let item = {
-          name: i18n.t('pagination.page') +' '+ i,
-          value: i
-        }
-        vm.listPage.push(item)
-      }
-    },
-    watch: {
-        pageInput () {
-            // this.currentPage = val
-            // this.currentPagePagination = this.currentPage + 1
-        },
-        pageCount (val) {
-          let vm = this
-          for (let i = 1; i <= val; i++) {
-            let item = {
-              name: i18n.t('pagination.page') +' '+ i,
-              value: i
-            }
-            vm.listPage.push(item)
+      if (vm.$store.getters.activeChangeLang === true) {
+        for (let i = 1; i <= vm.pageCount; i++) {
+          let item = {
+            name: 'Page'  +' '+ i,
+            value: i
           }
-        },
-        currentPagePagination (val) {
-          let vm = this
-          vm.currentPage = val -1
-          vm.$emit('tiny:change-page', {
-            page: vm.currentPage
-          })
+          vm.listPage.push(item)
         }
+      } 
+      else {
+        for (let i = 1; i <= vm.pageCount; i++) {
+          let item = {
+            name: 'Trang'  +' '+ i,
+            value: i
+          }
+        vm.listPage.push(item)
+        }
+      }
     },
     computed: {
+      activeChangeLang () {
+        let vm = this
+        return vm.$store.getters.activeChangeLang
+      },
       breakpointName () {
-        return this.$store.getters.getBreakpointName
-      }
+        let vm = this
+        return vm.$store.getters.getBreakpointName
+      },
+    },
+    watch: {
+      activeChangeLang (val) {
+        let vm = this
+        if (vm.$store.getters.activeChangeLang === true) {
+            for (let i = 1; i <= vm.pageCount; i++) {
+              let item = {
+                name: 'Page' +' '+ i,
+                value: i
+              }
+              vm.listPage = []
+              vm.listPage.push(item)
+            }
+        }
+        else {
+            for (let i = 1; i <= vm.pageCount; i++) {
+              let item = {
+                name: 'Trang'  +' '+ i,
+                value: i
+              }
+            vm.listPage = []
+            vm.listPage.push(item)
+            }
+        }
+       
+      },
+      pageInput () {
+          // this.currentPage = val
+          // this.currentPagePagination = this.currentPage + 1
+      },
+      pageCount (val) {
+        let vm = this
+        setTimeout(function () {
+          if (i18n.locale == 'en') {
+            for (let i = 1; i <= vm.pageCount; i++) {
+              let item = {
+                name: 'Page' +' '+ i,
+                value: i
+              }
+              vm.listPage.push(item)
+            }
+          } 
+          else if (i18n.locale == 'vi') {
+            for (let i = 1; i <= vm.pageCount; i++) {
+              let item = {
+                name: 'Trang' +' '+ i,
+                value: i
+              }
+            vm.listPage.push(item)
+            }
+          }
+        }, 200)
+        
+      },
+      currentPagePagination (val) {
+        let vm = this
+        vm.currentPage = val -1
+        vm.$emit('tiny:change-page', {
+          page: vm.currentPage
+        })
+      },
     },
     methods: {
       prevPage () {
@@ -124,7 +178,6 @@ import i18n from '@/plugins/i18n'
         vm.$emit('tiny:change-page', {
           page: vm.currentPage
         })
-        console.log('vm.currentPage1', vm.currentPage)
       },
       nextPage () {
         let vm = this
@@ -133,7 +186,6 @@ import i18n from '@/plugins/i18n'
         vm.$emit('tiny:change-page', {
           page: vm.currentPage
         })
-        console.log('vm.currentPage2', vm.currentPage)
       },
     },
   }

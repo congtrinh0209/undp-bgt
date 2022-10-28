@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 import $ from 'jquery'
+import i18n from '@/plugins/i18n'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -75,7 +76,12 @@ export default new Vuex.Store({
       state.formThongKe = payload
     },
     SET_ACTIVECHANGELANG (state, payload) {
-      state.activeChangeLang = payload
+      if (i18n.locale == 'en') {
+        state.activeChangeLang = true
+      } else {
+        state.activeChangeLang = false
+      }
+        // state.activeChangeLang = payload
     }
   },
   actions: {
