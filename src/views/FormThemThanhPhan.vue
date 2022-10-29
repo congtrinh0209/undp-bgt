@@ -56,6 +56,7 @@
             class="flex input-form"
             @input="toCurrency(item.name)"
             v-model="data[item.name]"
+            type='number'
             :placeholder="item['placeHolder']"
             solo
             dense
@@ -101,7 +102,7 @@
           <div class="col-12" v-if="item.type === 'attack'" style="border: 1px solid #D9D9D9">
             <input type="file" id="file_upload" :multiple="item.multiple" @input="uploadFile()" style="display:none">
             <div v-if="fileUpload && fileUpload.length">
-              <div class="pb-2" @click="viewFileUpload()" v-for="(item, key) in fileUpload" v-bind:key="key" >
+              <div class="pb-2" @click="viewFileUpload()" v-for="(item, key) in fileUpload" v-bind:key="key">
                 <v-icon size="18" color="green" v-if="getExtension(item) === 'xls' || getExtension(item) === 'xlsx'">mdi-file-excel-outline</v-icon>
                 <v-icon size="18" color="blue" v-else-if="getExtension(item) === 'doc' || getExtension(item) === 'docx'">mdi-file-word-outline</v-icon>
                 <v-icon size="18" color="red" v-else-if="getExtension(item) === 'pdf'">mdi-file-pdf-box</v-icon>
@@ -177,12 +178,35 @@ export default {
     created () {
       let vm = this
       vm.$store.commit('SET_INDEXTAB', 0)
+      if (vm.data.files) {
+        if (vm.data.files[0]) { 
+          vm.$store.commit('SET_FILEUPLOADYET', true)
+        }
+        else { 
+          vm.$store.commit('SET_FILEUPLOADYET', false)
+        }
+      } 
+      else { 
+        vm.$store.commit('SET_FILEUPLOADYET', false)
+      }
     },
     watch: {
       '$route': function (newRoute, oldRoute) {
         let vm = this
         vm.$store.commit('SET_INDEXTAB', 0)
+        if (vm.data.files) {
+          if (vm.data.files[0]) { 
+            vm.$store.commit('SET_FILEUPLOADYET', true)
+          }
+          else { 
+            vm.$store.commit('SET_FILEUPLOADYET', false)
+          }
+        } 
+        else { 
+          vm.$store.commit('SET_FILEUPLOADYET', false)
+        }
       },
+      
     },
     methods: {
       processRules (rulesStr) {
@@ -207,11 +231,13 @@ export default {
             name: files[index]['name']
           })
         }
+        vm.$store.commit('SET_FILEUPLOADYET', true)
       },
       deleteFileAttack (item, index) {
         let vm = this
         if (!item.id) {
           vm.fileUpload.splice(index, 1)
+          vm.$store.commit('SET_FILEUPLOADYET', false)
         } else {
           vm.$store.commit('SET_SHOWCONFIRM', true)
           let confirm = {
@@ -230,12 +256,14 @@ export default {
               vm.$store.dispatch('deleteFile', filter).then(function(result) {
                 vm.fileUpload.splice(index, 1)
                 toastr.success('Xóa tài liệu đính kèm thành công')
+                vm.$store.commit('SET_FILEUPLOADYET', false)
               }).catch(function(){
                 toastr.success('Xóa tài liệu đính kèm thất bại')
               })
             }
           }
           vm.$store.commit('SET_CONFIG_CONFIRM_DIALOG', confirm)
+          
         }
       },
       getExtension (file) {
@@ -314,6 +342,22 @@ export default {
           document.getElementById('file_upload').value = ''
           vm.fileUpload = []
         }
+
+        // if (vm.data.files) {
+        //   if (vm.data.files[0]) { 
+        //     console.log('ok', vm.data.files) 
+        //     vm.$store.commit('SET_FILEUPLOADYET', true)
+        //   }
+        //   else { 
+        //     console.log('n') 
+        //     vm.$store.commit('SET_FILEUPLOADYET', false)
+        //   }
+        // } 
+        // else { 
+        //   console.log('not') 
+        //   vm.$store.commit('SET_FILEUPLOADYET', false)
+        // }
+
       },
       validateForm () {
         let vm = this

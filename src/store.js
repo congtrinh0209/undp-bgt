@@ -23,7 +23,8 @@ export default new Vuex.Store({
     },
     formData: '',
     formThongKe: '',
-    activeChangeLang: false
+    activeChangeLang: false,
+    fileUploadYet: false,
   },
   getters: {
     getIndexTab: (state) => state.indexTab,
@@ -48,6 +49,9 @@ export default new Vuex.Store({
     },
     activeChangeLang: (state) => {
       return state.activeChangeLang
+    },
+    fileUploadYet: (state) => {
+      return state.fileUploadYet
     },
   },
   mutations: {
@@ -81,7 +85,9 @@ export default new Vuex.Store({
       } else {
         state.activeChangeLang = false
       }
-        // state.activeChangeLang = payload
+    },
+    SET_FILEUPLOADYET (state, payload) {
+      state.fileUploadYet = payload
     }
   },
   actions: {
