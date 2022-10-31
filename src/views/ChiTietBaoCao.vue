@@ -433,6 +433,7 @@ export default {
         dialogDoAction: false,
         ghiChuDoAction: '',
         dialogLichSu: false,
+        text_lang: '',
         headersTienTrinh: [
           {
               sortable: false,
@@ -477,19 +478,23 @@ export default {
     },
     created () {
       let vm = this
+      let i = 0
       if (!vm.isAdmin && !vm.checkRole('XEMBAOCAODONVI') && !vm.checkRole('XEMTATCABAOCAO')) {
         vm.$router.push({ path: '/login'})
         return
       }
       vm.getChiTietBaoCao()
-      // vm.sttText = i18n.t('basic.stt')
-      // console.log(this.$store.getters.activeChangeLang)
     },
     computed: {
       activeChangeLang () {
         let vm = this
         return vm.$store.getters.activeChangeLang
-      }
+      },
+      // mauBaoCaoHeaders () {
+      //   let vm = this
+      //   return vm.$store.getters.mauBaoCaoHeaders
+      // },
+      
     },
     watch: {
       '$route': function (newRoute, oldRoute) {
@@ -498,6 +503,7 @@ export default {
       },
       activeChangeLang (val) {
         let vm = this
+        let i = 0
         vm.headersTienTrinh = [].concat( 
           [
           {
@@ -539,6 +545,35 @@ export default {
           },
           ]
         )
+        while (i<10) {
+          if (vm.headers[i]) {
+            if (vm.headers[i]['text_lang'] == '_stt') {
+              vm.headers[i]['text'] = i18n.t('chiTietBaoCao.stt')
+            }
+            else if (vm.headers[i]['text_lang'] == '_tenvanban') {
+              vm.headers[i]['text'] = i18n.t('chiTietBaoCao.tenVanBan')
+            }
+            else if (vm.headers[i]['text_lang'] == '_loaivanban') {
+              vm.headers[i]['text'] = i18n.t('chiTietBaoCao.loaiVanBan')
+            }
+            else if (vm.headers[i]['text_lang'] == '_coquanbanhanh') {
+              vm.headers[i]['text'] = i18n.t('chiTietBaoCao.coQuanBanHanh')
+            }
+            else if (vm.headers[i]['text_lang'] == '_ngaybanhanh') {
+              vm.headers[i]['text'] = i18n.t('chiTietBaoCao.ngayBanHanh')
+            }
+            else if (vm.headers[i]['text_lang'] == '_sohieuvanban') {
+              vm.headers[i]['text'] = i18n.t('chiTietBaoCao.soHieuVanBan')
+            }
+            else if (vm.headers[i]['text_lang'] == '_hientrang') {
+              vm.headers[i]['text'] = i18n.t('chiTietBaoCao.tinhTrang')
+            }
+            else if (vm.headers[i]['text_lang'] == '_action') {
+              vm.headers[i]['text'] = i18n.t('chiTietBaoCao.thaoTac')
+            }
+          }
+          i++;
+        }
       },
 
     },
@@ -586,6 +621,7 @@ export default {
       },
       getChiTietMauBaoCao (key) {
         let vm = this
+        let i = 0
         let filter = {
           collectionName: 'maubaocao',
           keySearch: 'madinhdanh',
@@ -597,6 +633,36 @@ export default {
           vm.headers = vm.chiTietMauBaoCao.mauHienThi[0]['headers']
           vm.itemsPerPage = vm.chiTietMauBaoCao.mauHienThi[0].hasOwnProperty('itemsPerPage') ? vm.chiTietMauBaoCao.mauHienThi[0].itemsPerPage : 0
           vm.getdanhSachThanhPhan()
+          // vm.$store.commit('SET_mauBaoCaoHeaders', vm.headers)
+          while (i<10) {
+            if (vm.headers[i]) {
+              if (vm.headers[i]['text_lang'] == '_stt') {
+                vm.headers[i]['text'] = i18n.t('chiTietBaoCao.stt')
+              }
+              else if (vm.headers[i]['text_lang'] == '_tenvanban') {
+                vm.headers[i]['text'] = i18n.t('chiTietBaoCao.tenVanBan')
+              }
+              else if (vm.headers[i]['text_lang'] == '_loaivanban') {
+                vm.headers[i]['text'] = i18n.t('chiTietBaoCao.loaiVanBan')
+              }
+              else if (vm.headers[i]['text_lang'] == '_coquanbanhanh') {
+                vm.headers[i]['text'] = i18n.t('chiTietBaoCao.coQuanBanHanh')
+              }
+              else if (vm.headers[i]['text_lang'] == '_ngaybanhanh') {
+                vm.headers[i]['text'] = i18n.t('chiTietBaoCao.ngayBanHanh')
+              }
+              else if (vm.headers[i]['text_lang'] == '_sohieuvanban') {
+                vm.headers[i]['text'] = i18n.t('chiTietBaoCao.soHieuVanBan')
+              }
+              else if (vm.headers[i]['text_lang'] == '_hientrang') {
+                vm.headers[i]['text'] = i18n.t('chiTietBaoCao.tinhTrang')
+              }
+              else if (vm.headers[i]['text_lang'] == '_action') {
+                vm.headers[i]['text'] = i18n.t('chiTietBaoCao.thaoTac')
+              }
+            }
+            i++;
+          }
         }).catch(function () {
         })
       },
@@ -634,7 +700,7 @@ export default {
       showAddThanhPhan () {
         let vm = this
         if (vm.danhSachThanhPhan.length && vm.chiTietMauBaoCao.nhapNhieuThanhPhan != 'true') {
-          toastr.error('Không thể thêm thành phần. Loại báo cáo chỉ có 1 thành phần')
+          toastr.error(i18n.t('chiTietBaoCao.khongTheThemThanhPhan'))
           return
         }
         vm.readonlyForm = false
@@ -684,25 +750,34 @@ export default {
               "noiDung": formData
             }
           }
-          console.log('dataBaoCao', filter.data)
+          // console.log('dataBaoCao', filter.data)
           vm.loadingAction = true
-          if (!vm.editThanhPhan) {
-            vm.$store.dispatch('collectionCreate', filter).then(function (result) {
-              vm.runProcessUploadFiles(result.resp)
-            }).catch(function (response) {
-              vm.loadingAction = false
-              toastr.remove()
-              toastr.error('Thêm mới thất bại')
-            })
+          console.log('0',this.$store.getters.fileUploadYet)
+          if (this.$store.getters.fileUploadYet == false) {
+            vm.loadingAction = false
+            toastr.remove()
+            toastr.error(i18n.t('chiTietBaoCao.chuaThemFileDinhKem'))
           } else {
-            filter['id'] = vm.thanhPhanEdit.primKey
-            vm.$store.dispatch('collectionUpdate', filter).then(function (result) {
-              vm.runProcessUploadFiles(vm.thanhPhanEdit)
-            }).catch(function (response) {
-              vm.loadingAction = false
-              toastr.remove()
-              toastr.error('Cập nhật thất bại')
-            })
+            if (!vm.editThanhPhan) {
+              console.log('1',this.$store.getters.fileUploadYet)
+              vm.$store.dispatch('collectionCreate', filter).then(function (result) {
+                vm.runProcessUploadFiles(result.resp)
+              }).catch(function (response) {
+                vm.loadingAction = false
+                toastr.remove()
+                toastr.error(i18n.t('chiTietBaoCao.themMoiThatBai')) 
+              })
+            } else if (vm.editThanhPhan) {
+              console.log('2',this.$store.getters.fileUploadYet)
+              filter['id'] = vm.thanhPhanEdit.primKey
+              vm.$store.dispatch('collectionUpdate', filter).then(function (result) {
+                vm.runProcessUploadFiles(vm.thanhPhanEdit)
+              }).catch(function (response) {
+                vm.loadingAction = false
+                toastr.remove()
+                toastr.error(i18n.t('chiTietBaoCao.capNhatThatBai'))
+              })
+            }
           }
         }
       },
@@ -726,11 +801,11 @@ export default {
         vm.$store.commit('SET_SHOWCONFIRM', true)
         let confirm = {
           auth: false,
-          title: 'Xóa thành phần',
-          message: 'Bạn có chắc chắn muốn xóa thành phần báo cáo này',
+          title: i18n.t('chiTietBaoCao.xoaThanhPhan'),
+          message: i18n.t('chiTietBaoCao.banCoChacChanXoa'),
           button: {
-            yes: 'Có',
-            no: 'Không'
+            yes: i18n.t('basic.yes'),
+            no: i18n.t('basic.no'),
           },
           callback: () => {
             let filter = {
@@ -741,12 +816,12 @@ export default {
             vm.$store.dispatch('collectionDelete', filter).then(function (result) {
               vm.loading = false
               toastr.remove()
-              toastr.success('Xóa thành phần thành công')
+              toastr.success(i18n.t('chiTietBaoCao.xoaThanhPhanThanhCong'))
               vm.getdanhSachThanhPhan()
             }).catch(function (response) {
               vm.loading = false
               toastr.remove()
-              toastr.error('Xóa thành phần thất bại')
+              toastr.error(i18n.t('chiTietBaoCao.xoaThanhPhanThatBai'))
             })
           }
         }
@@ -782,14 +857,14 @@ export default {
         vm.$store.dispatch('collectionUpdate', filter).then(function (result) {
           vm.loadingAction = false
           toastr.remove()
-          toastr.success('Thực hiện thành công')
+          toastr.success(i18n.t('chiTietBaoCao.thucHienThanhCong'))
           vm.dialogDoAction = false
           vm.$router.push({ path: '/bao-cao/' + vm.type})
         }).catch(function () {
           vm.loadingAction = false
           vm.dialogDoAction = false
           toastr.remove()
-          toastr.error('Thực hiện thất bại')
+          toastr.error(i18n.t('thucHienThatBai'))
         })
       },
       checkRoleAction (role) {
@@ -842,7 +917,7 @@ export default {
             vm.loadingAction = false
             vm.dialogThemThanhPhan = false
             toastr.remove()
-            toastr.success('Thực hiện thành công')
+            toastr.success(i18n.t('chiTietBaoCao.thucHienThanhCong'))
             vm.getdanhSachThanhPhan()
             return
           } else {
@@ -850,9 +925,9 @@ export default {
           }
         }).catch(function (xhr) {
           toastr.clear()
-          toastr.error('Tài liệu ' + fileName + ' tải lên không thành công. Vui lòng kiểm tra lại.')
+          toastr.error(i18n.t('chiTietBaoCao.taiLieu') + fileName + i18n.t('chiTietBaoCao.taiLenKhongThanhCong'))
           let files = ''
-          try {
+          try { 
             files = $('#file_upload')[0].files
           } catch (error) {
           }
@@ -861,7 +936,7 @@ export default {
             vm.loadingAction = false
             vm.dialogThemThanhPhan = false
             toastr.remove()
-            toastr.success('Thực hiện thành công')
+            toastr.success(i18n.t('chiTietBaoCao.thucHienThanhCong'))
             vm.getdanhSachThanhPhan()
             return
           } else {
@@ -938,7 +1013,7 @@ export default {
         return output
       },
       getStatus(danhTinhDienTu) {
-        return danhTinhDienTu[0] ? danhTinhDienTu[0].tinhTrangSuDungTaiKhoan['tenMuc'] : 'Chưa tạo tài khoản'
+        return danhTinhDienTu[0] ? danhTinhDienTu[0].tinhTrangSuDungTaiKhoan['tenMuc'] : i18n.t('chiTietBaoCao.chuaTaoTaiKhoan')
       },
       getColor (danhTinhDienTu) {
         let status = danhTinhDienTu[0] ? String(danhTinhDienTu[0].tinhTrangSuDungTaiKhoan['MaMuc']) : '0'
