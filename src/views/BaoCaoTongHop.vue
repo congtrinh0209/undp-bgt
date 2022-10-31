@@ -430,6 +430,9 @@ export default {
         if (vm.type === 'cho-duyet') {
           vm.dynamicType = i18n.t('drawer.baoCaoChoDuyet')
         }
+        if (vm.type === 'cho-phe-duyet') {
+          vm.dynamicType = i18n.t('drawer.baoCaoChoPheDuyet')
+        }
         if (vm.type === 'tra-cuu') {
           vm.dynamicType = i18n.t('drawer.traCuu')
         }
@@ -480,6 +483,9 @@ export default {
           if (vm.type === 'cho-duyet') {
             vm.dynamicType = i18n.t('drawer.baoCaoChoDuyet')
           }
+          if (vm.type === 'cho-phe-duyet') {
+            vm.dynamicType = i18n.t('drawer.baoCaoChoPheDuyet')
+          }
           if (vm.type === 'tra-cuu') {
             vm.dynamicType = i18n.t('drawer.traCuu')
           }
@@ -503,6 +509,9 @@ export default {
           }
           if (vm.type === 'cho-duyet') {
             vm.dynamicType = i18n.t('drawer.baoCaoChoDuyet')
+          }
+          if (vm.type === 'cho-phe-duyet') {
+            vm.dynamicType = i18n.t('drawer.baoCaoChoPheDuyet')
           }
           if (vm.type === 'tra-cuu') {
             vm.dynamicType = i18n.t('drawer.traCuu')
@@ -631,6 +640,9 @@ export default {
           }
           if (vm.type === 'cho-duyet') {
             filter.data.tinhTrang_maMuc = "APPROVAL"
+          }
+          if (vm.type === 'cho-phe-duyet') {
+            filter.data.tinhTrang_maMuc = "UNIT_LEVEL_APPROVAL"
           }
         }
         vm.$store.dispatch('collectionFilter', filter).then(function (response) {

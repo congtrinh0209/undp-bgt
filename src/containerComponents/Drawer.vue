@@ -95,7 +95,7 @@
           <v-list-item-title class="text-drawer text-list">{{ $t('drawer.baoCaoXuLyLai') }}</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
-      <v-list-item v-if="isAdmin || checkRole('XEMBAOCAODONVI') || checkRole('XEMTATCABAOCAO')" :class="menuName === 'BaoCaoChoDuyet' ? 'item-active' : ''" class="mb-3 list-menu" @click.stop="goToPage('/bao-cao/cho-duyet')">
+      <v-list-item v-if="isAdmin || checkRole('TRINHXETDUYET') || checkRole('XEMBAOCAODONVI') || checkRole('XEMTATCABAOCAO')" :class="menuName === 'BaoCaoChoDuyet' ? 'item-active' : ''" class="mb-3 list-menu" @click.stop="goToPage('/bao-cao/cho-duyet')">
         <v-list-item-icon >
           <v-tooltip top color="#0073C8">
             <template v-slot:activator="{ on, attrs }">
@@ -105,7 +105,30 @@
           </v-tooltip>
         </v-list-item-icon>
         <v-list-item-content>
-          <v-list-item-title class="text-drawer text-list">{{ $t('drawer.baoCaoChoDuyet') }}</v-list-item-title>
+          <v-tooltip top color="#0073C8">
+            <template v-slot:activator="{ on, attrs }">
+              <v-list-item-title v-bind="attrs" v-on="on" class="text-drawer text-list">{{ $t('drawer.baoCaoChoDuyet') }}</v-list-item-title>
+            </template>
+            <span>{{ $t('drawer.baoCaoChoDuyet') }}</span>
+          </v-tooltip>
+        </v-list-item-content>
+      </v-list-item>
+      <v-list-item v-if="isAdmin || checkRole('KYDUYET') || checkRole('XEMBAOCAODONVI') || checkRole('XEMTATCABAOCAO')" :class="menuName === 'BaoCaoChoPheDuyet' ? 'item-active' : ''" class="mb-3 list-menu" @click.stop="goToPage('/bao-cao/cho-phe-duyet')">
+        <v-list-item-icon >
+          <v-tooltip top color="#0073C8">
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon v-bind="attrs" v-on="on" class="icon-draw" style="font-size: 24px !important">mdi-file-sign</v-icon>
+            </template>
+            <span>{{ $t('drawer.baoCaoChoPheDuyet') }}</span>
+          </v-tooltip>
+        </v-list-item-icon>
+        <v-list-item-content>
+          <v-tooltip top color="#0073C8">
+            <template v-slot:activator="{ on, attrs }">
+              <v-list-item-title v-bind="attrs" v-on="on" class="text-drawer text-list">{{ $t('drawer.baoCaoChoPheDuyet') }}</v-list-item-title>
+            </template>
+            <span>{{ $t('drawer.baoCaoChoPheDuyet') }}</span>
+          </v-tooltip>
         </v-list-item-content>
       </v-list-item>
       <!--  -->
