@@ -80,7 +80,7 @@ import i18n from '@/plugins/i18n'
       let vm = this
       vm.currentPage = vm.pageInput
       vm.currentPagePagination = vm.currentPage + 1
-      if (vm.$store.getters.activeChangeLang === true) {
+      if (i18n.locale == 'en') {
         for (let i = 1; i <= vm.pageCount; i++) {
           let item = {
             name: 'Page'  +' '+ i,
@@ -112,7 +112,7 @@ import i18n from '@/plugins/i18n'
     watch: {
       activeChangeLang (val) {
         let vm = this
-        if (vm.$store.getters.activeChangeLang === true) {
+        if (i18n.locale == 'en') {
             for (let i = 1; i <= vm.pageCount; i++) {
               let item = {
                 name: 'Page' +' '+ i,

@@ -76,7 +76,7 @@
                   @click.stop="showDoAction(item)"
                 >
                   <v-icon size="18">mdi-arrow-right-drop-circle-outline</v-icon>&nbsp;
-                  <span >{{($store.getters.activeChangeLang) ? item.tenHanhDong_lang : item.tenHanhDong}}</span>
+                  <span >{{i18n.locale == 'en' ? item.tenHanhDong_lang : item.tenHanhDong}}</span>
                 </v-btn>
               </v-col>
               <!--  -->
@@ -473,12 +473,14 @@ export default {
               class: 'th-center'
           },
         ],
-        danhSachTienTrinh: []
+        danhSachTienTrinh: [],
+        headersDsThanhPhanOrigin: [],
+        i18n: {}
       }
     },
     created () {
       let vm = this
-      let i = 0
+      vm.i18n = i18n
       if (!vm.isAdmin && !vm.checkRole('XEMBAOCAODONVI') && !vm.checkRole('XEMTATCABAOCAO')) {
         vm.$router.push({ path: '/login'})
         return
@@ -503,7 +505,7 @@ export default {
       },
       activeChangeLang (val) {
         let vm = this
-        let i = 0
+        console.log('i18n.locale', i18n.locale)
         vm.headersTienTrinh = [].concat( 
           [
           {
@@ -545,34 +547,13 @@ export default {
           },
           ]
         )
-        while (i<10) {
-          if (vm.headers[i]) {
-            if (vm.headers[i]['text_lang'] == '_stt') {
-              vm.headers[i]['text'] = i18n.t('chiTietBaoCao.stt')
-            }
-            else if (vm.headers[i]['text_lang'] == '_tenvanban') {
-              vm.headers[i]['text'] = i18n.t('chiTietBaoCao.tenVanBan')
-            }
-            else if (vm.headers[i]['text_lang'] == '_loaivanban') {
-              vm.headers[i]['text'] = i18n.t('chiTietBaoCao.loaiVanBan')
-            }
-            else if (vm.headers[i]['text_lang'] == '_coquanbanhanh') {
-              vm.headers[i]['text'] = i18n.t('chiTietBaoCao.coQuanBanHanh')
-            }
-            else if (vm.headers[i]['text_lang'] == '_ngaybanhanh') {
-              vm.headers[i]['text'] = i18n.t('chiTietBaoCao.ngayBanHanh')
-            }
-            else if (vm.headers[i]['text_lang'] == '_sohieuvanban') {
-              vm.headers[i]['text'] = i18n.t('chiTietBaoCao.soHieuVanBan')
-            }
-            else if (vm.headers[i]['text_lang'] == '_hientrang') {
-              vm.headers[i]['text'] = i18n.t('chiTietBaoCao.tinhTrang')
-            }
-            else if (vm.headers[i]['text_lang'] == '_action') {
-              vm.headers[i]['text'] = i18n.t('chiTietBaoCao.thaoTac')
-            }
+
+        for (let index = 0; index < vm.headers.length; index++) {
+          if (vm.headers[index]['text_lang'] && i18n.t('headerDanhSachThanhPhan.' + vm.headers[index]['text_lang']) && i18n.locale == 'en') {
+            vm.headers[index]['text'] = i18n.t('headerDanhSachThanhPhan.' + vm.headers[index]['text_lang'])
+          } else {
+            vm.headers[index]['text'] = vm.headersDsThanhPhanOrigin[index]['text']
           }
-          i++;
         }
       },
 
@@ -621,7 +602,6 @@ export default {
       },
       getChiTietMauBaoCao (key) {
         let vm = this
-        let i = 0
         let filter = {
           collectionName: 'maubaocao',
           keySearch: 'madinhdanh',
@@ -630,38 +610,17 @@ export default {
         vm.$store.dispatch('collectionDetailSearch', filter).then(function (response) {
           vm.chiTietMauBaoCao = response.resp
           vm.mauNhapForm = vm.chiTietMauBaoCao.mauNhap
-          vm.headers = vm.chiTietMauBaoCao.mauHienThi[0]['headers']
+          vm.headers = vm.chiTietMauBaoCao.mauHienThi[0]['headers'].map(item => ({...item}))
+          vm.headersDsThanhPhanOrigin = vm.headers.map(item => ({...item}))
           vm.itemsPerPage = vm.chiTietMauBaoCao.mauHienThi[0].hasOwnProperty('itemsPerPage') ? vm.chiTietMauBaoCao.mauHienThi[0].itemsPerPage : 0
           vm.getdanhSachThanhPhan()
           // vm.$store.commit('SET_mauBaoCaoHeaders', vm.headers)
-          while (i<10) {
-            if (vm.headers[i]) {
-              if (vm.headers[i]['text_lang'] == '_stt') {
-                vm.headers[i]['text'] = i18n.t('chiTietBaoCao.stt')
-              }
-              else if (vm.headers[i]['text_lang'] == '_tenvanban') {
-                vm.headers[i]['text'] = i18n.t('chiTietBaoCao.tenVanBan')
-              }
-              else if (vm.headers[i]['text_lang'] == '_loaivanban') {
-                vm.headers[i]['text'] = i18n.t('chiTietBaoCao.loaiVanBan')
-              }
-              else if (vm.headers[i]['text_lang'] == '_coquanbanhanh') {
-                vm.headers[i]['text'] = i18n.t('chiTietBaoCao.coQuanBanHanh')
-              }
-              else if (vm.headers[i]['text_lang'] == '_ngaybanhanh') {
-                vm.headers[i]['text'] = i18n.t('chiTietBaoCao.ngayBanHanh')
-              }
-              else if (vm.headers[i]['text_lang'] == '_sohieuvanban') {
-                vm.headers[i]['text'] = i18n.t('chiTietBaoCao.soHieuVanBan')
-              }
-              else if (vm.headers[i]['text_lang'] == '_hientrang') {
-                vm.headers[i]['text'] = i18n.t('chiTietBaoCao.tinhTrang')
-              }
-              else if (vm.headers[i]['text_lang'] == '_action') {
-                vm.headers[i]['text'] = i18n.t('chiTietBaoCao.thaoTac')
-              }
+          for (let index = 0; index < vm.headers.length; index++) {
+            if (vm.headers[index]['text_lang'] && i18n.t('headerDanhSachThanhPhan.' + vm.headers[index]['text_lang']) && i18n.locale == 'en') {
+              vm.headers[index]['text'] = i18n.t('headerDanhSachThanhPhan.' + vm.headers[index]['text_lang'])
+            } else {
+              vm.headers[index]['text'] = vm.headersDsThanhPhanOrigin[index]['text']
             }
-            i++;
           }
         }).catch(function () {
         })

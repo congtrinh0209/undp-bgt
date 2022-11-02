@@ -12,7 +12,7 @@
       <v-layout wrap>
         <!--  -->
         <div v-for="(item, index) in mauNhap" v-bind:key="index" :class="item['fieldClass']" class="py-0 mb-2">
-          <label>{{item.title}} <span class="red--text" v-if="item.required">(*)</span></label>
+          <label>{{i18n.locale == 'en' && item['title_lang'] ? i18n.t('formThemThanhPhan.' + item['title_lang']) : item.title}} <span class="red--text" v-if="item.required">(*)</span></label>
           <v-text-field
             v-if="item.type === 'textfield'"
             class="flex input-form"
@@ -149,6 +149,7 @@
 
 <script>
 import Vue from 'vue'
+import i18n from '@/plugins/i18n'
 import $ from 'jquery'
 import toastr from 'toastr'
 toastr.options = {
@@ -172,11 +173,13 @@ export default {
         rules: {
           required: value => !!value || $t('basic.thongTinBatBuoc')
         },
-        fileUpload: []
+        fileUpload: [],
+        i18n: {}
       }
     },
     created () {
       let vm = this
+      vm.i18n = i18n
       vm.$store.commit('SET_INDEXTAB', 0)
       if (vm.data.files) {
         if (vm.data.files[0]) { 

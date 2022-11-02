@@ -354,9 +354,28 @@ const messages = {
             taiLenKhongThanhCong :' upload failed. Please check again.',
             khongTheThemThanhPhan: 'Cannot add component. The report type has only one component',
         },
+        headerDanhSachThanhPhan: {
+            _stt: 'S/N',
+            _tenvanban: 'Name of Document',
+            _loaivanban: 'Document type',
+            _coquanbanhanh: 'Issuing authority',
+            _ngaybanhanh: 'Issuance date',
+            _sohieuvanban: 'Text number',
+            _hientrang: 'Status',
+            _action: 'Action'
+        },
         formThemThanhPhan: {
             taiLenTaiLieuDinhKem: 'Upload attachments',
             khongCoGiayToDinhKem:'No documents attached!',
+            _dinhkem: 'Files attach',
+            _tenvanban: 'Name of Document',
+            _loaivanban: 'Document type',
+            _coquanbanhanh: 'Issuing authority',
+            _ngaybanhanh: 'Issuance date',
+            _sohieuvanban: 'Text number',
+            _hientrang: 'Status',
+            _phamvivungtacdong: 'Impact zone',
+            _tomtatnoidung: 'Summary content'
         },
         viTriChucDanh: {
             stt: 'S/n',
@@ -371,8 +390,8 @@ const messages = {
 }
 
 const i18n = new VueI18n({
-    locale: 'vi', // set locale
-    fallbackLocale: 'vi', // set fallback locale
+    locale: localStorage.getItem('i18nLocal') ? localStorage.getItem('i18nLocal') : 'vi', // set locale
+    fallbackLocale: localStorage.getItem('i18nLocal') ? localStorage.getItem('i18nLocal') : 'vi', // set fallback locale
     messages, // set locale messages
 })
 

@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import i18n from '@/plugins/i18n'
+  import i18n from '@/plugins/i18n'
 
   export default {
     name: 'AppBar',
@@ -92,6 +92,10 @@ import i18n from '@/plugins/i18n'
       changeLocale(locale) {
         let vm = this
         i18n.locale = locale
+        try {
+          localStorage.setItem('i18nLocal', locale)
+        } catch (error) {
+        }
         vm.$store.commit('SET_ACTIVECHANGELANG', !vm.activeChangeLang)
       },
       changeDrawer () {

@@ -194,7 +194,11 @@
     },
     methods: {
       changeLocale(locale) {
-        i18n.locale = locale;
+        i18n.locale = locale
+        try {
+          localStorage.setItem('i18nLocal', locale)
+        } catch (error) {
+        }
       },
       login () {
         let vm = this

@@ -80,11 +80,7 @@ export default new Vuex.Store({
       state.formThongKe = payload
     },
     SET_ACTIVECHANGELANG (state, payload) {
-      if (i18n.locale == 'en') {
-        state.activeChangeLang = true
-      } else {
-        state.activeChangeLang = false
-      }
+      state.activeChangeLang = payload
     },
     SET_FILEUPLOADYET (state, payload) {
       state.fileUploadYet = payload
