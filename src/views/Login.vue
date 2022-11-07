@@ -10,13 +10,14 @@
         <div class="wrap-title">
           <div class="d-flex justify-end py-0 pb-0 my-0 px-5">
             <button v-for="entry in languages" :key="entry.title" @click="changeLocale(entry.language)">
-              <flag :iso="entry.flag" v-bind:squared=false />
-              {{entry.title}}
+              <img v-if="entry.language == 'vi'" class="img-flag" :src="`${publicPath}/images/flag-vn.svg?t=93111413`">
+              <img v-if="entry.language == 'en'" class="img-flag" :src="`${publicPath}/images/flag-us.svg?t=93111413`">
+              <span v-if="entry.language == 'vi'" class="ml-1">Tiếng việt</span>
+              <span v-if="entry.language == 'en'" class="ml-1">English</span>
             </button>
           </div>
           <v-flex style="text-align: center;">
             <img class="img-login-logo" :src="`${publicPath}/images/image-logo.png?t=93111413`">
-            
           </v-flex>
           
           <v-flex class="wrap-title pt-1 mb-2">
@@ -628,6 +629,10 @@
   .wrap-title {
     text-align: center;
     margin-top: 0px;
+  }
+  .img-flag {
+    width: 23px;
+    height: 16px;
   }
   @media screen and (max-width: 426px) {
     .action-title {

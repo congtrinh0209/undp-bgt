@@ -12,8 +12,8 @@
           </div>
           <div class="lang-btn">
             <button v-for="entry in languages" :key="entry.title" @click="changeLocale(entry.language)">
-              <flag :iso="entry.flag" v-bind:squared=false />
-              <!-- {{entry.title}} -->
+              <img v-if="entry.language == 'vi'"  :src="`${publicPath}/images/flag-vn.svg?t=93111413`">
+              <img v-if="entry.language == 'en'"  :src="`${publicPath}/images/flag-us.svg?t=93111413`">
             </button>
           </div>
         </div>
@@ -256,7 +256,7 @@
     right: 15px;
     position: absolute;
   }
-  .lang-btn span.fi {
+  .lang-btn img {
     width: 25px;
     height: 35px;
     margin-left: 15px;
