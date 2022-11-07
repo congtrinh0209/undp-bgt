@@ -667,7 +667,6 @@ export default {
         vm.editThanhPhan = false
         setTimeout(function () {
           vm.$refs.formThanhPhan.initForm()
-          vm.$refs.formThanhPhan.resetForm()
         }, 200)
       },
       showUpdateThanhPhan (item) {

@@ -285,6 +285,26 @@
                       vm.$cookies.set('UserInfo', dataUser2, result.expires_in)
                       vm.$cookies.set('Roles', vaiTroSuDung, result.expires_in)
                     }
+                    if (result.maSoCanBo) {
+                      let filter = {
+                        collectionName: 'canbo',
+                        data: {
+                          keyword: vm.keywordSearch,
+                          page: 0,
+                          size: 5,
+                          orderFields: 'hoVaTen',
+                          orderTypes: 'asc',
+                          maSoCanBo: result.maSoCanBo
+                        }
+                      }
+                      vm.$store.dispatch('collectionFilter', filter).then(function (response) {
+                        let empInfo = response.content[0]
+                        if (empInfo) {
+                          localStorage.setItem('EmployeeInfo', JSON.stringify(empInfo))
+                        }
+                      }).catch(function () {
+                      })
+                    }
                     setTimeout(function () {
                       vm.goToPage()
                     }, 200)

@@ -24,6 +24,30 @@
             :clearable="!readonly"
             :rules="item.required ? [v => (v !== '' && v !== null && v !== undefined) || $t('basic.thongTinBatBuoc')] : []"
           ></v-text-field>
+          <v-text-field
+            v-if="item.type === 'number'"
+            class="flex input-form"
+            v-model="data[item.name]"
+            :placeholder="item['placeHolder']"
+            solo
+            dense
+            hide-details="auto"
+            :clearable="!readonly"
+            type="number"
+            :rules="item.required ? [v => (v !== '' && v !== null && v !== undefined) || $t('basic.thongTinBatBuoc')] : []"
+            @input="!readonly && item.hasOwnProperty('keyCalculator') ? triggerCalculator(item.keyCalculator) : ''"
+          ></v-text-field>
+          <v-text-field
+            v-if="item.type === 'calculator'"
+            class="flex input-form"
+            v-model="data[item.name]"
+            :placeholder="item['placeHolder']"
+            solo
+            dense
+            hide-details="auto"
+            :clearable="!readonly"
+            :rules="item.required ? [v => (v !== '' && v !== null && v !== undefined) || $t('basic.thongTinBatBuoc')] : []"
+          ></v-text-field>
           <v-textarea
             v-if="item.type === 'textarea'"
             class="flex input-form"
@@ -174,12 +198,19 @@ export default {
           required: value => !!value || $t('basic.thongTinBatBuoc')
         },
         fileUpload: [],
-        i18n: {}
+        i18n: {},
+        dataDefaultOutSite: {
+          govAgencyName: ''
+        }
       }
     },
     created () {
       let vm = this
       vm.i18n = i18n
+      try {
+        vm.dataDefaultOutSite.govAgencyName = JSON.parse(localStorage.getItem('EmployeeInfo'))['coQuanDonVi']['tenGoi']
+      } catch (error) {
+      }
       vm.$store.commit('SET_INDEXTAB', 0)
       if (vm.data.files) {
         if (vm.data.files[0]) { 
@@ -188,8 +219,7 @@ export default {
         else { 
           vm.$store.commit('SET_FILEUPLOADYET', false)
         }
-      } 
-      else { 
+      } else { 
         vm.$store.commit('SET_FILEUPLOADYET', false)
       }
     },
@@ -344,6 +374,16 @@ export default {
         } else {
           document.getElementById('file_upload').value = ''
           vm.fileUpload = []
+          vm.$refs.formThanhPhan.reset()
+          vm.$refs.formThanhPhan.resetValidation()
+          for (let key in vm.data) {
+            let filter = vm.mauNhap.find(function (item) {
+              return item.name == key
+            })
+            if (filter && filter.defaultValue) {
+              vm.data[key] = vm.dataDefaultOutSite[filter.defaultValue]
+            }
+          }
         }
 
         // if (vm.data.files) {
@@ -365,6 +405,21 @@ export default {
       validateForm () {
         let vm = this
         return vm.$refs.formThanhPhan.validate()
+      },
+      triggerCalculator (key) {
+        let vm = this
+        let dataTrigger = vm.mauNhap.find(function (item) {
+          return item.name == key
+        })
+        if (dataTrigger && dataTrigger.hasOwnProperty('calculator')) {
+          let dataInput = vm.data
+          let calu = dataTrigger['calculator'].replace(/data/g, 'dataInput')
+          try {
+            let valueData = eval(calu)
+            vm.data[key] = valueData
+          } catch (error) {
+          }
+        }
       },
       formatBirthDate (name) {
         let vm = this
