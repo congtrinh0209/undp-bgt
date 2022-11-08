@@ -69,7 +69,7 @@
         </v-list-item-content>
       </v-list-item> -->
       <!--  -->
-      <v-list-item v-if="isAdmin || checkRole('XEMBAOCAODONVI') || checkRole('XEMTATCABAOCAO')" :class="menuName === 'BaoCaoChoXuLy' ? 'item-active' : ''" class="mb-3 list-menu" @click.stop="goToPage('/bao-cao/cho-xu-ly')">
+      <v-list-item v-if="isAdmin || checkRole('CAPNHATBAOCAO')" :class="menuName === 'BaoCaoChoXuLy' ? 'item-active' : ''" class="mb-3 list-menu" @click.stop="goToPage('/bao-cao/cho-xu-ly')">
         <v-list-item-icon >
           <v-tooltip top color="#0073C8">
             <template v-slot:activator="{ on, attrs }">
@@ -82,7 +82,7 @@
           <v-list-item-title class="text-drawer text-list">{{ $t('drawer.baoCaoChoXuLy') }}</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
-      <v-list-item v-if="isAdmin || checkRole('XEMBAOCAODONVI') || checkRole('XEMTATCABAOCAO')" :class="menuName === 'BaoCaoXuLyLai' ? 'item-active' : ''" class="mb-3 list-menu" @click.stop="goToPage('/bao-cao/xu-ly-lai')">
+      <v-list-item v-if="isAdmin || checkRole('CAPNHATBAOCAO')" :class="menuName === 'BaoCaoXuLyLai' ? 'item-active' : ''" class="mb-3 list-menu" @click.stop="goToPage('/bao-cao/xu-ly-lai')">
         <v-list-item-icon >
           <v-tooltip top color="#0073C8">
             <template v-slot:activator="{ on, attrs }">
@@ -95,7 +95,7 @@
           <v-list-item-title class="text-drawer text-list">{{ $t('drawer.baoCaoXuLyLai') }}</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
-      <v-list-item v-if="isAdmin || checkRole('TRINHXETDUYET') || checkRole('XEMBAOCAODONVI') || checkRole('XEMTATCABAOCAO')" :class="menuName === 'BaoCaoChoDuyet' ? 'item-active' : ''" class="mb-3 list-menu" @click.stop="goToPage('/bao-cao/cho-duyet')">
+      <v-list-item v-if="isAdmin || checkRole('TRINHXETDUYET')" :class="menuName === 'BaoCaoChoDuyet' ? 'item-active' : ''" class="mb-3 list-menu" @click.stop="goToPage('/bao-cao/cho-duyet')">
         <v-list-item-icon >
           <v-tooltip top color="#0073C8">
             <template v-slot:activator="{ on, attrs }">
@@ -113,7 +113,7 @@
           </v-tooltip>
         </v-list-item-content>
       </v-list-item>
-      <v-list-item v-if="isAdmin || checkRole('KYDUYET') || checkRole('XEMBAOCAODONVI') || checkRole('XEMTATCABAOCAO')" :class="menuName === 'BaoCaoChoPheDuyet' ? 'item-active' : ''" class="mb-3 list-menu" @click.stop="goToPage('/bao-cao/cho-phe-duyet')">
+      <v-list-item v-if="isAdmin || checkRole('KYDUYET')" :class="menuName === 'BaoCaoChoPheDuyet' ? 'item-active' : ''" class="mb-3 list-menu" @click.stop="goToPage('/bao-cao/cho-phe-duyet')">
         <v-list-item-icon >
           <v-tooltip top color="#0073C8">
             <template v-slot:activator="{ on, attrs }">

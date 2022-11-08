@@ -280,10 +280,9 @@ export default {
       namBaoCaoItems() {
         let arr = [];
         let year = new Date().getFullYear();
-        // for (let i = 0; i <= 19; i++) {
-        //   arr.push({ tenMuc: "Năm " + (year - i), maMuc: year - i });
-        // }
-        arr.push({ tenMuc: "Năm " + year, maMuc: year });
+        for (let i = 2022; i <= year; i++) {
+          arr.push({ tenMuc: "Năm " + i, maMuc: i });
+        }
         return arr;
       }
     },

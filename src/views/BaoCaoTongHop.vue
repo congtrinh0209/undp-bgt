@@ -452,8 +452,8 @@ export default {
       namBaoCaoItems() {
         let arr = [];
         let year = new Date().getFullYear();
-        for (let i = 0; i <= 19; i++) {
-          arr.push({ tenMuc: "Năm " + (year - i), maMuc: year - i });
+        for (let i = 2022; i <= year; i++) {
+          arr.push({ tenMuc: "Năm " + i, maMuc: i });
         }
         return arr;
       },
@@ -639,10 +639,10 @@ export default {
             filter.data.tinhTrang_maMuc = "REPROCESSING"
           }
           if (vm.type === 'cho-duyet') {
-            filter.data.tinhTrang_maMuc = "APPROVAL"
+            filter.data.tinhTrang_maMuc = "UNIT_LEVEL_APPROVAL"
           }
           if (vm.type === 'cho-phe-duyet') {
-            filter.data.tinhTrang_maMuc = "UNIT_LEVEL_APPROVAL"
+            filter.data.tinhTrang_maMuc = "APPROVAL"
           }
         }
         vm.$store.dispatch('collectionFilter', filter).then(function (response) {
