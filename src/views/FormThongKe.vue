@@ -13,7 +13,7 @@
       <v-layout wrap>
         <!--  -->
         <div v-for="(item, index) in mauNhap" v-bind:key="index" :class="item['fieldClass']" class="py-0 mb-2">
-          <label>{{item.title}} <span class="red--text" v-if="item.required">(*)</span></label>
+          <label>{{i18n.locale == 'en' && item['title_en'] ? item['title_en'] : item.title}} <span class="red--text" v-if="item.required">(*)</span></label>
           <v-text-field
             v-if="item.type === 'textfield'"
             class="flex input-form"
@@ -107,7 +107,7 @@
 
 <script>
 import Vue from 'vue'
-import $ from 'jquery'
+import i18n from '@/plugins/i18n'
 import toastr from 'toastr'
 toastr.options = {
   'closeButton': true,
@@ -129,12 +129,14 @@ export default {
         ],
         rules: {
           required: value => !!value || 'Thông tin bắt buộc'
-        }
+        },
+        i18n: {},
       }
     },
     created () {
       let vm = this
       vm.$store.commit('SET_INDEXTAB', 0)
+      vm.i18n = i18n
     },
     watch: {
       '$route': function (newRoute, oldRoute) {

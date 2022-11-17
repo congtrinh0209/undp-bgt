@@ -279,7 +279,7 @@
                     </v-tooltip>
                   </template>
               </v-data-table>
-              <pagination v-if="pageCount" :pageInput="page" :total="total" :pageCount="pageCount" @tiny:change-page="changePage"></pagination>
+              <pagination v-if="pageCount" :pageInput="page" :total="total" :pageCount="pageCount" @tiny:change-page="changePage" style="margin-bottom: 20px;"></pagination>
             </v-col>
           </v-row>
         </div>

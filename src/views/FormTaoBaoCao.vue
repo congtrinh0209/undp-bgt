@@ -331,7 +331,17 @@ export default {
             vm.danhSachNhomBaoCao = response.content
           }
           if (collection === 'NHOMCOQUAN') {
-            vm.danhSachNhomDonViGiao = response.content
+            let sortCounter = function (serviceList) {
+              function compare(a, b) {
+                if (a.soThuTu < b.soThuTu)
+                  return -1
+                if (a.soThuTu > b.soThuTu)
+                  return 1
+                return 0
+              }
+              return serviceList.sort(compare)
+            }
+            vm.danhSachNhomDonViGiao = sortCounter(response.content)
           }
         }).catch(function () {
         })

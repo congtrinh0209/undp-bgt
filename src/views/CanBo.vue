@@ -177,7 +177,7 @@
           </div>
         </template>
       </v-data-table>
-      <pagination v-if="pageCount" :pageInput="page" :pageCount="pageCount" :total="total" @tiny:change-page="changePage"></pagination>
+      <pagination v-if="pageCount" :pageInput="page" :pageCount="pageCount" :total="total" @tiny:change-page="changePage" style="margin-bottom: 50px;"></pagination>
     </div>
     <v-dialog
       max-width="900"

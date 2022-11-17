@@ -109,7 +109,7 @@
                 >
                 <v-icon size="18" class="white--text">mdi-file-excel-outline</v-icon>
                 &nbsp;
-                <span class="white--text">Xuất excel</span>
+                <span class="white--text">{{ $t('thongKe.xuatExcel')}}</span>
               </v-btn>
               <v-btn color="primary" depressed small class="mx-0 text-white" @click="submitThongKe('reset')">
                 <v-icon size="18">mdi-magnify</v-icon>&nbsp;
@@ -288,6 +288,7 @@ export default {
     props: ['type', 'id'],
     data() {
       return {
+        headersThongKeOrigin: '',
         loadingExport: false,
         dialogChonMauThongKe: false,
         validFormChonMauThongKe: false,
@@ -390,10 +391,26 @@ export default {
       vm.getDanhMuc('NHOMBAOCAO')
       vm.getDanhSachMauBaoCao()
     },
+    computed: {
+      activeChangeLang () {
+        let vm = this
+        return vm.$store.getters.activeChangeLang
+      },
+    },
     watch: {
       '$route': function (newRoute, oldRoute) {
         let vm = this
-      }
+      },
+      activeChangeLang (val) {
+        let vm = this
+        for (let index = 0; index < vm.headers.length; index++) {
+          if (vm.headers[index].hasOwnProperty('text_en') && vm.headers[index]['text_en'] && i18n.locale == 'en') {
+            vm.headers[index]['text'] = vm.headersThongKeOrigin[index]['text_en']
+          } else {
+            vm.headers[index]['text'] = vm.headersThongKeOrigin[index]['text']
+          }
+        }
+      },
     },
     methods: {
       getDanhMuc (collection) {
@@ -443,7 +460,17 @@ export default {
           vm.mauThongKe = vm.danhSachMauThongKe[0]
         }
         vm.mauNhapForm = vm.mauThongKe['searchForm']
-        vm.headers = vm.mauThongKe.listView[0]['headers']
+        vm.headers = vm.mauThongKe.listView[0]['headers'].map(item => ({...item}))
+        vm.headersThongKeOrigin = vm.headers.map(item => ({...item}))
+        for (let index = 0; index < vm.headers.length; index++) {
+          if (vm.headers[index].hasOwnProperty('text_en') && vm.headers[index]['text_en'] && i18n.locale == 'en') {
+            vm.headers[index]['text'] = vm.headersThongKeOrigin[index]['text_en']
+          } else {
+            vm.headers[index]['text'] = vm.headersThongKeOrigin[index]['text']
+          }
+        }
+        
+
         vm.itemsPerPage = vm.mauThongKe.listView[0].hasOwnProperty('itemsPerPage') ? vm.mauThongKe.listView[0].itemsPerPage : 0
 
         setTimeout(function () {

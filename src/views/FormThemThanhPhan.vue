@@ -12,7 +12,7 @@
       <v-layout wrap>
         <!--  -->
         <div v-for="(item, index) in mauNhap" v-bind:key="index" :class="item['fieldClass']" class="py-0 mb-2">
-          <label>{{i18n.locale == 'en' && item['title_lang'] ? i18n.t('formThemThanhPhan.' + item['title_lang']) : item.title}} <span class="red--text" v-if="item.required">(*)</span></label>
+          <label>{{i18n.locale == 'en' && item['title_en'] ? item['title_en'] : item.title}} <span class="red--text" v-if="item.required">(*)</span></label>
           <v-text-field
             v-if="item.type === 'textfield'"
             class="flex input-form"

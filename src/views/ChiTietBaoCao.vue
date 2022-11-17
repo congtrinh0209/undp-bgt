@@ -505,7 +505,6 @@ export default {
       },
       activeChangeLang (val) {
         let vm = this
-        console.log('i18n.locale', i18n.locale)
         vm.headersTienTrinh = [].concat( 
           [
           {
@@ -549,8 +548,8 @@ export default {
         )
 
         for (let index = 0; index < vm.headers.length; index++) {
-          if (vm.headers[index]['text_lang'] && i18n.t('headerDanhSachThanhPhan.' + vm.headers[index]['text_lang']) && i18n.locale == 'en') {
-            vm.headers[index]['text'] = i18n.t('headerDanhSachThanhPhan.' + vm.headers[index]['text_lang'])
+          if (vm.headers[index]['text_en'] && i18n.locale == 'en') {
+            vm.headers[index]['text'] = vm.headersDsThanhPhanOrigin[index]['text_en']
           } else {
             vm.headers[index]['text'] = vm.headersDsThanhPhanOrigin[index]['text']
           }
@@ -614,10 +613,10 @@ export default {
           vm.headersDsThanhPhanOrigin = vm.headers.map(item => ({...item}))
           vm.itemsPerPage = vm.chiTietMauBaoCao.mauHienThi[0].hasOwnProperty('itemsPerPage') ? vm.chiTietMauBaoCao.mauHienThi[0].itemsPerPage : 0
           vm.getdanhSachThanhPhan()
-          // vm.$store.commit('SET_mauBaoCaoHeaders', vm.headers)
+
           for (let index = 0; index < vm.headers.length; index++) {
-            if (vm.headers[index]['text_lang'] && i18n.t('headerDanhSachThanhPhan.' + vm.headers[index]['text_lang']) && i18n.locale == 'en') {
-              vm.headers[index]['text'] = i18n.t('headerDanhSachThanhPhan.' + vm.headers[index]['text_lang'])
+            if (vm.headers[index]['text_en'] && i18n.locale == 'en') {
+              vm.headers[index]['text'] = vm.headersDsThanhPhanOrigin[index]['text_en']
             } else {
               vm.headers[index]['text'] = vm.headersDsThanhPhanOrigin[index]['text']
             }
